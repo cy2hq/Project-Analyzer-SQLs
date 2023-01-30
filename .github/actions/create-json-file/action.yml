@@ -1,0 +1,12 @@
+name: 'create-json-file'
+description: 'Creates the JSON:API static file'
+inputs:
+  json-version:
+    description: 'version of the SQLs provided'
+    required: true
+outputs:
+  data: #json string
+    description: 'the created json string'
+runs:
+  using: 'node16' 
+  main: 'index.js'
