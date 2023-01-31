@@ -1,0 +1,121 @@
+{
+  "meta": {
+    "version": ""
+  },
+  "data": [
+    {
+      "id": "ALL_PROJECT_ITEMS_OF_PROJECT",
+      "category": "AUDIT",
+      "element": "ALL",
+      "status": "I",
+      "description": "All projectitems in a project",
+      "level": "2",
+      "sql": "SELECT  \ndecode( objecttype  \n, 0, 'Record'  \n, 1, 'Index'  \n, 2, decode( objectid2  \n                    , 0, 'Field'  \n                    , 102, 'Field Label' )  \n, 3, 'Field Format'  \n, 4, 'Translate'  \n, 5, 'Page'  \n, 6, 'Menu'  \n, 7, 'Component'  \n, 8, 'Record PeopleCode'  \n, 9, 'Menu PeopleCode'  \n, 10, 'Query'  \n, 11, 'Tree Structure'  \n, 12, 'Tree'  \n, 13, 'Access Group'  \n, 14, 'Color'  \n, 15, 'Style'  \n, 16, 'Business Process Map'  \n, 17, 'Business Process'  \n, 18, 'Activity'  \n, 19, 'Role'  \n, 20, 'Process Definition'  \n, 21, 'Process Server'  \n, 22, 'Process Type'  \n, 23, 'Process Job'  \n, 24, 'Process Recurrence'  \n, 25, 'Message Catalog Entry'  \n, 26, 'Dimension'  \n, 27, 'Cube Definition'  \n, 28, 'Cube Instance Definition'  \n, 29, 'Business Interlink'  \n, 30, 'SQL Object'  \n, 31, 'File Layout Definition'  \n, 32, 'Component Interface'  \n, 33, 'Application Engine Program'  \n, 34, 'Application Engine Section'  \n, 35, 'Message Node'  \n, 36, 'Message Channel'  \n, 37, 'Message'  \n, 38, 'Approval Rule Set'  \n, 39, 'Message PeopleCode'  \n, 40, 'Subscription PeopleCode'  \n, 41, 'Channel PeopleCode'  \n, 42, 'Component Interface PeopleCode'  \n, 43, 'Application Engine PeopleCode'  \n, 44, 'Page PeopleCode'  \n, 45, 'Page Field PeopleCode'  \n, 46, 'Component PeopleCode'  \n, 47, 'Component Record PeopleCode'  \n, 48, 'Component Record Field PeopleCode'  \n, 49, 'Image'  \n, 50, 'Style Sheet'  \n, 51, 'HTML'  \n, 52, 'File Reference'  \n, 53, 'Permission List'  \n, 54, 'Portal Registry Definition'  \n, 55, 'Portal Registry Structure' || ' - ' || decode( objectvalue2  \n                                                                          , 'C', 'Content Reference'  \n                                                                          , 'F', 'Folder' )  \n, 56, 'URL Definition'  \n, 57, 'Application Package'  \n, 58, 'Application Package PeopleCode'  \n, 59, 'Portal Registry User homepage'  \n, 60, 'Problem Type'  \n, 61, 'Archive template'  \n, 62, 'XSLT'  \n, 63, 'Portal Registry User Favorites'  \n, 64, 'Mobile Page'  \n, 65, 'Relationship'\n, 66, 'Component Interface Property PeopleCode'\n, 67, 'Optimization Model'\n, 68, 'File Reference'\n, 69, 'File Reference Type Code'\n, 70, 'Archive Object Definition'\n, 71, 'Archive Template (Type 2)'\n, 72, 'Diagnostic Plug-in'\n, 73, 'Analytic Model' \n, 74, 'Not used'\n, 75, 'Java Portlet User Preference'\n, 76, 'WSRP Remote Producer'\n, 77, 'WSRP Remote Portlet' \n, 78, 'WSRP Cloned Portlet Handle' \n, 79, 'Service' \n, 80, 'Service Operation' \n, 81, 'Service Operation Handler' \n, 82, 'Service Operation Version' \n, 83, 'Service Operation Routing' \n, 84, 'IB Queue'\n, 85, 'BIP Template Definition' \n, 86, 'BIP Report Definition' \n, 87, 'BIP File Definition' \n, 88, 'BIP Data Source Definition' \n, 89, 'WSDL' \n, 90, 'Message Schema' \n, 91, 'Connected Query Definition' \n, 92, 'Logical Schema' \n, 93, 'XML Schema' \n, 94, 'Relational Schema' \n, 95, 'Dependency Document' \n, 96, 'Document Schema' \n, 97, 'Essbase Cube Dimension' \n, 98, 'Essbase Cube Outline' \n, 99, 'Essbase Cube Connection' \n, 100, 'Essbase Cube Template'\n, 101, 'Delimited Schema' \n, 102, 'Positional Schema' \n, 103, 'Application Data Set Definition' \n, 104, 'Test Definition' \n, 105, 'Test Framework Test Case' \n, 106, 'Application Data Set Binding' \n, 107, 'Feed Definition' \n, 108, 'Feed Categorie' \n, 109, 'Feed Data Type' \n, 110, 'JSON Document' \n, 111, 'Related Content Definition' \n, 112, 'Related Content Service' \n, 113, 'Related Content Configuration' \n, 114, 'Related Content Layout' \n, 115, 'Search Attribute' \n, 116, 'Search Definition' \n, 117, 'Search Categorie' \n, 118, 'Search Context' \n, 119, 'Integration Group') AS \"Object Type\"  \n, CASE objecttype  \n   WHEN 1 THEN objectvalue1 || ' - Index ID ' || objectvalue2  \n   WHEN 4 THEN objectvalue1 || ' - ' || objectvalue2 || ' - ' || objectvalue3 || ' - ' || objectvalue4  \n   WHEN 8 THEN objectvalue1 || '.' || objectvalue2 || '.' || objectvalue3  \n   WHEN 9 THEN objectvalue1 || '.' || objectvalue3 || '.' || objectvalue4  \n   WHEN 10 THEN objectvalue1 || ' - OprID: ' || objectvalue2  \n   WHEN 12 THEN objectvalue1 || ' - ' || objectvalue2 || ' - ' || objectvalue3 || ' - ' || objectvalue4  \n   WHEN 14 THEN objectvalue1 || ' - OprID: ' || objectvalue2  \n   WHEN 20 THEN objectvalue1 || ' - ' || objectvalue2  \n   WHEN 25 THEN objectvalue1 || ', ' || objectvalue2 || ' - ' || objectvalue3  \n   WHEN 26 THEN objectvalue1 || ' - ' || objectvalue2  \n   WHEN 27 THEN objectvalue1 || ' - ' || objectvalue2  \n   WHEN 28 THEN objectvalue1 || ' - ' || objectvalue2  \n   WHEN 34 THEN objectvalue1 || '.' || objectvalue2  \n   WHEN 35 THEN objectvalue1 || '.' || objectvalue2  \n   WHEN 36 THEN objectvalue1 || '.' || objectvalue2  \n   WHEN 37 THEN objectvalue1 || '.' || objectvalue2  \n   WHEN 38 THEN objectvalue1 || ' - ' || objectvalue2  \n   WHEN 39 THEN objectvalue1 || '.' || objectvalue2  \n   WHEN 40 THEN objectvalue1 || '.' || objectvalue2  \n   WHEN 42 THEN objectvalue1 || '.' || objectvalue2  \n   WHEN 43 THEN objectvalue1 || ' - ' || objectvalue2 || ' - ' || objectvalue3 || ' - ' || objectvalue4  \n   WHEN 44 THEN objectvalue1 || '.' || objectvalue2  \n   WHEN 45 THEN objectvalue1 || '.' || objectvalue2 || '.' || objectvalue3  \n   WHEN 46 THEN objectvalue1 || '.' || objectvalue2 || '.' || objectvalue3  \n   WHEN 47 THEN objectvalue1 || '.' || objectvalue2 || '.' || objectvalue3 || '.' || objectvalue4  \n   WHEN 48 THEN objectvalue1 || '.' || objectvalue2 || '.' || objectvalue3 || '.' || TRANSLATE( objectvalue4, ' ' , '.' )  \n   WHEN 52 THEN objectvalue1 || ' - Path: ' || objectvalue2  \n   WHEN 55 THEN objectvalue3  \n   WHEN 57 THEN objectvalue1 || ' - ' || objectvalue2 || '-' || objectvalue3  \n   WHEN 58 THEN objectvalue1 || ':' || objectvalue2 || '.OnExecute'  \n   WHEN 63 THEN objectvalue1 || ' - ' || objectvalue2 || ' - ' || decode( objectvalue3, 'L', 'Fav. Folder', 'V' , 'Favorite' ) || ' - ' || objectvalue4  \n   ELSE objectvalue1 || '.' || objectvalue2 || '.' || objectvalue3 || '.' || objectvalue4  \n   END AS \"PeopleSoft Object Name\" \n, decode( upgradeaction, \n              0 , 'Copy', \n              1 , 'Delete', \n              2 , 'None', \n              3 , 'CopyProp' ) AS \"Mod Type\"\n, decode( takeaction, \n              0 , 'N', \n              1 , 'Y' ) AS \"Upgrade\" \n, decode( COPYDONE, \n              0 , 'N', \n              1 , 'Y' ) AS \"Done\"\n, OBJECTVALUE1  \n, OBJECTVALUE2  \n, OBJECTVALUE3  \n, OBJECTVALUE4  \n, OBJECTTYPE  \nFROM psprojectitem  \nWHERE PROJECTNAME = :1\nORDER BY 1",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "DESCR50",
+          "alias": "DESCR50"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DESCR254",
+          "alias": "DESCR254"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "DESCR10",
+          "alias": "DESCR10"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "YES_NO_FLAG_LBL",
+          "alias": "YES_NO_FLAG_LBL"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "YESNO_LBL",
+          "alias": "YESNO_LBL"
+        },
+        {
+          "sequenceNumber": 6,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "OBJECTVALUE1"
+        },
+        {
+          "sequenceNumber": 7,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 8,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 9,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 10,
+          "fieldName": "OBJECTTYPE",
+          "alias": "OBJECTTYPE"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "CHECK_FIRST_CHARS_OF_ELMS",
+      "category": "AUDIT",
+      "element": "ALL",
+      "status": "I",
+      "description": "Check for first characters of various elements",
+      "level": "2",
+      "sql": "SELECT \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2,  \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4, \n  A.OBJECTTYPE \nFROM \n  PSPROJECTITEM A  \nWHERE \n  A.PROJECTNAME = :1 \n  AND A.OBJECTTYPE = 0 \n  AND EXISTS ( \n    SELECT \n      'X' \n    FROM \n       PSRECDEFN P \n    WHERE \n      P.RECNAME=A.OBJECTVALUE1 \n      AND %Substring(P.RECNAME, 1, :2) <> %Substring(:3, 1, :2) \n      AND P.LASTUPDOPRID <> 'PPLSOFT' ) \nUNION ALL \nSELECT \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4, \n  A.OBJECTTYPE \nFROM \n  PSPROJECTITEM A  \n WHERE \n    A.PROJECTNAME = :1 \n    AND A.OBJECTTYPE = 2 \n    AND EXISTS ( \n    SELECT \n      'X' \n    FROM \n      PSFLDDEFN P \n    WHERE \n      P.FLDDEFNNAME = A.OBJECTVALUE1 \n      AND %Substring(P.FLDDEFNNAME, 1, :2) <> %Substring(:3, 1, :2) \n      AND P.LASTUPDOPRID <> 'PPLSOFT' ) \nUNION ALL \nSELECT \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4, \n  A.OBJECTTYPE \nFROM \n  PSPROJECTITEM A  \nWHERE \n  A.PROJECTNAME = :1 \n  AND A.OBJECTTYPE = 5 \n  AND EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSPNLDEFN P \n    WHERE \n      P.PNLNAME = A.OBJECTVALUE1 \n      AND %Substring(P.PNLNAME, 1, :2) <> %Substring(:3, 1, :2) \n      AND P.LASTUPDOPRID <> 'PPLSOFT' ) \nUNION ALL \nSELECT \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4, \n  A.OBJECTTYPE \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.PROJECTNAME = :1 \n  AND A.OBJECTTYPE = 7 \n  AND EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSPNLGRPDEFN P \n    WHERE \n      P.PNLGRPNAME = A.OBJECTVALUE1 \n      AND %Substring(P.PNLGRPNAME, 1, :2) <> %Substring(:3, 1, :2) \n      AND P.LASTUPDOPRID <> 'PPLSOFT' ) \nUNION ALL \nSELECT \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4,  \n  A.OBJECTTYPE \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.PROJECTNAME = :1 \n  AND A.OBJECTTYPE = 6 \n  AND EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSMENUDEFN P \n    WHERE \n      P.MENUNAME = A.OBJECTVALUE1 \n      AND %Substring(P.MENUNAME, 1, :2) <> %Substring(:3, 1, :2) \n      AND P.LASTUPDOPRID <> 'PPLSOFT' ) \nUNION ALL \nSELECT \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2,  \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4, \n  A.OBJECTTYPE \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.PROJECTNAME = :1 \n  AND A.OBJECTTYPE = 31 \n  AND EXISTS (\n    SELECT \n      'X'\n    FROM \n      PSFLDDEFN P \n    WHERE \n      P.FLDDEFNNAME = A.OBJECTVALUE1 \n      AND %Substring(P.FLDDEFNNAME, 1, :2) <> %Substring(:3, 1, :2) \n      AND P.LASTUPDOPRID <> 'PPLSOFT' ) \nUNION ALL \nSELECT \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2,  \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4, \n  A.OBJECTTYPE \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.PROJECTNAME = :1 \n  AND A.OBJECTTYPE = 33 \n  AND EXISTS ( \n    SELECT \n      'X' \n    FROM \n      PSAEAPPLDEFN P \n    WHERE \n      P.AE_APPLID = A.OBJECTVALUE1 \n      AND %Substring(P.AE_APPLID, 1, :2) <> %Substring(:3, 1, :2) \n      AND P.LASTUPDOPRID <> 'PPLSOFT' ) \nUNION ALL \nSELECT \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4, \n  A.OBJECTTYPE \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.PROJECTNAME =:1 \n  AND A.OBJECTTYPE = 49 \n  AND EXISTS ( \n    SELECT \n      'X' \n    FROM \n      PSCONTDEFN P \n    WHERE \n      P.CONTNAME = A.OBJECTVALUE1 \n      AND %Substring(P.CONTNAME, 1, :2) <> %Substring(:3, 1, :2) \n      AND P.LASTUPDOPRID <> 'PPLSOFT' )",
+      "notes": "<p>OBJECTYPE = 0 --&gt; Records<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 --&gt; Fields<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5 --&gt; Pages<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7 --&gt; Components<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6 --&gt; Menus<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 31 --&gt; File layout definitions<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 33 --&gt; Application Engine Programs<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 49 --&gt; Images</p>",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "OBJECTVALUE1"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTTYPE",
+          "alias": "OBJECTTYPE"
+        }
+      ],
+      "prompts": [
+        {
+          "promptNumber": 2,
+          "field": "END_POS",
+          "default": "3"
+        },
+        {
+          "promptNumber": 3,
+          "field": "SEARCH_STRING",
+          "default": "CY2"
+        }
+      ]
+    }
+  ]
+}
