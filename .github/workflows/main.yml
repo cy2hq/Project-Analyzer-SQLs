@@ -42,14 +42,4 @@ jobs:
         with:
           default_author: github_actions 
           author_email: marcus@cuda.org
-
-
-
-#      - uses: actions/setup-node@v3
-#        with:
-#          node-version: 18.13
-
-    #    - run: docker tag api-dev:latest registry.digitalocean.com/connect/api-dev:
-#  generate:
-
-#  deploy:
+          tag: 'v${{ steps.version.outputs.version }}-json'
