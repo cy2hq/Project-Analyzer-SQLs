@@ -1,0 +1,9 @@
+name: 'write-json-file'
+description: 'writes JSON string to file'
+inputs:
+  json:
+    description: 'JSON to write'
+    required: true
+runs:
+  using: 'node16' 
+  main: 'index.js'
