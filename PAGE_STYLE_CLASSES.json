@@ -1,0 +1,46 @@
+{
+    "id" : "PAGE_STYLE_CLASSES",
+    "category" : "FLUID",
+    "element" : "STYLECLASS",
+    "status" : "A",
+    "description" : "Page StyleClasses in project",
+    "level" : "2",
+    "sql" : "select \n  A.PNLNAME, \n  A.FFSTYLEDESKTOP, \n  A.FFSTYLEPHONE, \n  A.FFSTYLETABLET, \n  A.FFSTYLEMEDIUM, \n  A.FFSTYLEEXLARGE \nfrom \n  PSPNLDEFN A \nWHERE \n  (\n    A.FFSTYLEDESKTOP <> ' ' \n    OR A.FFSTYLEPHONE <> ' ' \n    OR A.FFSTYLETABLET <> ' ' \n    OR A.FFSTYLEMEDIUM <> ' ' \n    OR A.FFSTYLEEXLARGE <> ' '\n  ) \n  AND EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM B \n    WHERE \n      B.OBJECTTYPE = 5 \n      AND A.PNLNAME = B.OBJECTVALUE1 \n      AND B.PROJECTNAME = : 1\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 4,
+            "fieldName" : "FFSTYLETABLET",
+            "alias" : "FFSTYLETABLET"
+        },
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "FFSTYLEDESKTOP",
+            "alias" : "FFSTYLEDESKTOP"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "FFSTYLEPHONE",
+            "alias" : "FFSTYLEPHONE"
+        },
+        {
+            "sequenceNumber" : 5,
+            "fieldName" : "FFSTYLEMEDIUM",
+            "alias" : "FFSTYLEMEDIUM"
+        },
+        {
+            "sequenceNumber" : 6,
+            "fieldName" : "FFSTYLEEXLARGE",
+            "alias" : "FFSTYLEEXLARGE"
+        }
+    ],
+    "prompts" : [
+    ]
+}

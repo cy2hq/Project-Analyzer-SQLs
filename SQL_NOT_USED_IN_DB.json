@@ -1,0 +1,21 @@
+{
+    "id" : "SQL_NOT_USED_IN_DB",
+    "category" : "OBSOLETE",
+    "element" : "SQL",
+    "status" : "A",
+    "description" : "Stand alone SQL statements in the project but not found in PeopleCode in the database",
+    "level" : "3",
+    "sql" : "SELECT \n  A.OBJECTVALUE1 \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.OBJECTTYPE = 30 \n  AND A.OBJECTID1 = 65 \n  AND A.OBJECTVALUE2 = 0 \n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPCMNAME C \n    WHERE \n      C.REFNAME = A.OBJECTVALUE1 \n      AND C.RECNAME = 'SQL'\n      )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "SQL NAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

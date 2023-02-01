@@ -1,0 +1,21 @@
+{
+    "id" : "REC_MISSING_SQLVIIEW_PROJ",
+    "category" : "MISSING_PROJECT",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Record views missing in the project",
+    "level" : "4",
+    "sql" : "SELECT \n  B.RECNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECDEFN B \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND B.RECTYPE = 1 \n  AND A.PROJECTNAME =: 1 \n  AND NOT EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 30 \n      AND C.OBJECTID1 = 65 \n      AND C.OBJECTVALUE2 = 2 \n      AND C.OBJECTVALUE1 = B.RECNAME \n      AND C.PROJECTNAME = A.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

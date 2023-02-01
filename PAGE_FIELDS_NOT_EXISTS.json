@@ -1,0 +1,26 @@
+{
+    "id" : "PAGE_FIELDS_NOT_EXISTS",
+    "category" : "MISSING_DB",
+    "element" : "FIELD",
+    "status" : "A",
+    "description" : "Page fields that do not exist in the database",
+    "level" : "4",
+    "sql" : "SELECT \n  A.PNLNAME, \n  A.FIELDNAME \nFROM \n  PSPNLFIELD A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 5 \n  AND A.PNLNAME = B.OBJECTVALUE1 \n  AND A.FIELDNAME <> ' ' \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSDBFIELD C \n    WHERE C.FIELDNAME = A.FIELDNAME \n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

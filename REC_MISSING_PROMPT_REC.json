@@ -1,0 +1,26 @@
+{
+    "id" : "REC_MISSING_PROMPT_REC",
+    "category" : "MISSING_DB",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Records with missing prompt tables in the database",
+    "level" : "4",
+    "sql" : "SELECT \n  B.RECNAME, \n  B.EDITTABLE \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B, \n  PSRECDEFN E \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND A.PROJECTNAME = : 1 \n  AND B.EDITTABLE <> ' ' \n  AND B.EDITTABLE = E.RECNAME \n  AND E.LASTUPDOPRID <> 'PPLSOFT' \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C\n      WHERE C.RECNAME = B.EDITTABLE \n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "RECNAME",
+            "alias" : "MISSING_PROMPT"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "EDITTABLE",
+            "alias" : "EDITTABLE"
+        }
+    ],
+    "prompts" : [
+    ]
+}

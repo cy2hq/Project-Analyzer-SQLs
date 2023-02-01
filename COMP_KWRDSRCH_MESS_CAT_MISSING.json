@@ -1,0 +1,26 @@
+{
+    "id" : "COMP_KWRDSRCH_MESS_CAT_MISSING",
+    "category" : "MISSING_PROJECT",
+    "element" : "MESS_CAT",
+    "status" : "A",
+    "description" : "Component Keyword Search missing message catalog in project",
+    "level" : "4",
+    "sql" : "SELECT \n  A.PTKEYWDSRCHMSGSET, \n  A.PTKEYWDSRCHMSGNUM \nFROM \n  PSPNLGRPDEFNEXT A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 7 \n  AND B.OBJECTID1 = 10 \n  AND B.OBJECTVALUE1 = A.PNLGRPNAME \n  AND A.PTKEYWDSRCHMSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.PTKEYWDSRCHMSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.PTKEYWDSRCHMSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PTKEYWDSRCHMSGSET",
+            "alias" : "PTKEYWDSRCHMSGSET"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "PTKEYWDSRCHMSGNUM",
+            "alias" : "PTKEYWDSRCHMSGNUM"
+        }
+    ],
+    "prompts" : [
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id" : "RECORDS_MISSING",
+    "category" : "MISSING_DB",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Records in project that do not exist in the database",
+    "level" : "4",
+    "sql" : "SELECT  \n  A.OBJECTVALUE1 \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.PROJECTNAME = :1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN B \n    WHERE \n      B.RECNAME = A.OBJECTVALUE1\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "RECORD_NOT_BUILT"
+        }
+    ],
+    "prompts" : [
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "id" : "REC_MISSING_RELLANGREC_PROJ",
+    "category" : "MISSING_PROJECT",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Related language records in records in the project, not existing in the project",
+    "level" : "4",
+    "sql" : "SELECT \n  B.RECNAME, \n  B.RELLANGRECNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECDEFN B \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND B.RELLANGRECNAME <> ' ' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C, \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 0 \n      AND C.RECNAME = D.OBJECTVALUE1 \n      AND C.RECNAME = B.RELLANGRECNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "RELLANGRECNAME",
+            "alias" : "RELLANGRECNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

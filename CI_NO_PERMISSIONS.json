@@ -1,0 +1,21 @@
+{
+    "id" : "CI_NO_PERMISSIONS",
+    "category" : "AUDIT",
+    "element" : "COMPINTERF",
+    "status" : "A",
+    "description" : "Component Interface is not on a Permission List",
+    "level" : "4",
+    "sql" : "SELECT \n  B.BCNAME \n \nFROM \n  PSPROJECTITEM A, \n  PSBCDEFN B \nWHERE \n  A.OBJECTVALUE1 = B.BCNAME\n   AND A.PROJECTNAME = : 1 \n  and objecttype = 32\n and bcname NOT IN\n(SELECT bcname FROM PSAUTHBUSCOMP)",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "BCNAME",
+            "alias" : "COMPONENT INTERFAC"
+        }
+    ],
+    "prompts" : [
+    ]
+}

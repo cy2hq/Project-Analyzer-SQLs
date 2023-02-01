@@ -1,0 +1,31 @@
+{
+    "id" : "XLAT_MISSING_FIELD_PROJ",
+    "category" : "MISSING_PROJECT",
+    "element" : "XLAT",
+    "status" : "A",
+    "description" : "Translate values without matching fields in the project",
+    "level" : "4",
+    "sql" : "SELECT \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3 \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.OBJECTTYPE = 4 \n  AND A.OBJECTID1 = 6 \n  AND A.OBJECTID2 = 22 \n  AND A.OBJECTID3 = 21 \n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM B \n    WHERE \n      B.OBJECTTYPE = 2 \n      AND B.OBJECTID2 = 0 \n      AND B.OBJECTVALUE1 = A.OBJECTVALUE1\n      AND B.PROJECTNAME = A.PROJECTNAME \n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "OBJECTVALUE1"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "OBJECTVALUE2",
+            "alias" : "OBJECTVALUE2"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "OBJECTVALUE3",
+            "alias" : "OBJECTVALUE3"
+        }
+    ],
+    "prompts" : [
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "id" : "FIELD_LABEL_NOT_FIELD_NAME",
+    "category" : "AUDIT",
+    "element" : "FIELD",
+    "status" : "A",
+    "description" : "Field label IDs that do not match the field name",
+    "level" : "3",
+    "sql" : "SELECT \n  A.FIELDNAME, \n  A.LABEL_ID \nFROM \n  PSDBFLDLABL A, \n  PSDBFIELD B, \n  PSPROJECTITEM C \nWHERE \n  B.FIELDNAME = A.FIELDNAME \n  AND C.OBJECTTYPE = 2 \n  AND C.OBJECTID2 = 0 \n  AND C.OBJECTVALUE1 = A.FIELDNAME \n  AND C.PROJECTNAME = : 1 \n  AND B.LASTUPDOPRID <> 'PPLSOFT' \n  AND A.LABEL_ID <> A.FIELDNAME",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "LABEL_ID",
+            "alias" : "LABEL_ID"
+        }
+    ],
+    "prompts" : [
+    ]
+}

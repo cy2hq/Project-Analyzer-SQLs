@@ -1,0 +1,21 @@
+{
+    "id" : "RECORDS_OBSOLETE_IN_PROJECT",
+    "category" : "OBSOLETE",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Records that are obsolete in the project",
+    "level" : "3",
+    "sql" : "SELECT B.RECNAME\nFROM PSPROJECTITEM A,\n     PSRECDEFN B\nWHERE A.OBJECTTYPE = 0\n  AND A.OBJECTID1 = 1\n  AND A.OBJECTVALUE1 = B.RECNAME\n  AND A.OBJECTID2 = 0\n  AND A.PROJECTNAME = : 1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLFIELD C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 5\n       AND D.OBJECTID1 = 9\n       AND C.PNLNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.RECNAME\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSRECFIELD C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 0\n       AND D.OBJECTID1 = 1\n       AND C.RECNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.EDITTABLE\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSRECDEFN C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 0\n       AND D.OBJECTID1 = 1\n       AND C.RECNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.RELLANGRECNAME\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLGRPDEFN C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 7\n       AND D.OBJECTID1 = 10\n       AND C.PNLGRPNAME = D.OBJECTVALUE1\n       AND (B.RECNAME = C.SEARCHRECNAME\n            OR B.RECNAME = C.ADDSRCHRECNAME)\n       AND A.PROJECTNAME = D.PROJECTNAME )",
+    "notes" : "<p>Records in the project that do not exist on a page in the project, do not exist as a prompt record for another record in the project, do not exist as a related language record for a another record in the project and do not exist as a search record for a component in the project.&nbsp;</p>",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

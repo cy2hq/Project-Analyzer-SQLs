@@ -1,0 +1,36 @@
+{
+    "id" : "MESS_CAT_GRID_NOT_EXISTS_PROJ2",
+    "category" : "MISSING_PROJECT",
+    "element" : "MESS_CAT",
+    "status" : "A",
+    "description" : "Message Catalog entries in grid not existing in the project part 2",
+    "level" : "4",
+    "sql" : "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.PTBTNMSGSET2, \n  A.PTBTNMSGNUM2 \nFROM \n  PSPNLBTNDATA A, \n  PSPROJECTITEM B \nWHERE \n  A.PNLNAME = B.OBJECTVALUE1 \n  AND B.OBJECTTYPE = 5 \n  AND A.PTBTNMSGSET2 > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.PTBTNMSGSET2 \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.PTBTNMSGNUM2 \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "PNLFLDID",
+            "alias" : "PNLFLDID"
+        },
+        {
+            "sequenceNumber" : 4,
+            "fieldName" : "PTBTNMSGNUM2",
+            "alias" : "PTBTNMSGNUM2"
+        },
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "PTBTNMSGSET2",
+            "alias" : "PTBTNMSGSET2"
+        }
+    ],
+    "prompts" : [
+    ]
+}

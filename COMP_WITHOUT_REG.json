@@ -1,0 +1,26 @@
+{
+    "id" : "COMP_WITHOUT_REG",
+    "category" : "MISSING_DB",
+    "element" : "COMPONENT",
+    "status" : "A",
+    "description" : "Components without portal registration in the database",
+    "level" : "2",
+    "sql" : "SELECT \n  B.PNLGRPNAME, \n  B.DESCR \nFROM \n  PSPROJECTITEM A, \n  PSPNLGRPDEFN B \nWHERE \n  B.PNLGRPNAME = A.OBJECTVALUE1 \n  AND B.MARKET = A.OBJECTVALUE2 \n  AND A.OBJECTTYPE = 7 \n  AND A.PROJECTNAME = :1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPRSMDEFN C \n    WHERE \n      B.PNLGRPNAME = C.PORTAL_URI_SEG2\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLGRPNAME",
+            "alias" : "MISSING_COMPONENT"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "DESCR",
+            "alias" : "DESCR"
+        }
+    ],
+    "prompts" : [
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id" : "SQL_NOT_USED_IN_PROJ",
+    "category" : "OBSOLETE",
+    "element" : "SQL",
+    "status" : "A",
+    "description" : "Stand alone SQL statements in the project but not used in PeopleCode",
+    "level" : "3",
+    "sql" : "SELECT \n  A.OBJECTVALUE1 \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.OBJECTTYPE = 30 \n  AND A.OBJECTID1 = 65 \n  AND A.OBJECTVALUE2 = 0 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM B, \n      PSPCMNAME C \n    WHERE \n      C.REFNAME = A.OBJECTVALUE1 \n      AND B.PROJECTNAME = A.PROJECTNAME \n      AND B.OBJECTVALUE1 = C.OBJECTVALUE1 \n      AND B.OBJECTVALUE2 = C.OBJECTVALUE2 \n      AND (\n        B.OBJECTVALUE3 = C.OBJECTVALUE3 \n        OR B.OBJECTVALUE3 = ' '\n      ) \n      AND (\n        B.OBJECTVALUE4 = C.OBJECTVALUE4 \n        OR B.OBJECTVALUE4 = ' '\n      ) \n      AND B.OBJECTID1 = C.OBJECTID1 \n      AND B.OBJECTID2 = C.OBJECTID2 \n      AND (\n        B.OBJECTID3 = C.OBJECTID3 \n        OR B.OBJECTID3 = 0\n      ) \n      AND (\n        B.OBJECTID4 = C.OBJECTID4 \n        OR B.OBJECTID4 = 0\n      ) \n      AND C.RECNAME = 'SQL'\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "SQL NAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

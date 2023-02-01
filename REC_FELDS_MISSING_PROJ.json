@@ -1,0 +1,26 @@
+{
+    "id" : "REC_FELDS_MISSING_PROJ",
+    "category" : "MISSING_PROJECT",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Record Fields missing as fields in the project",
+    "level" : "4",
+    "sql" : "SELECT \n  DISTINCT B.RECNAME, \n  B.FIELDNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B, \n  PSDBFIELD C \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND A.PROJECTNAME = :1\n  AND B.FIELDNAME = C.FIELDNAME \n  AND C.LASTUPDOPRID <> 'PPLSOFT' \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM D, \n      PSDBFIELD E \n    WHERE \n      D.OBJECTTYPE = 2 \n      AND D.OBJECTVALUE1 = E.FIELDNAME \n      AND D.OBJECTID2 = 0 \n      AND B.FIELDNAME = E.FIELDNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

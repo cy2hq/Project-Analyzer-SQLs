@@ -1,0 +1,26 @@
+{
+    "id" : "REC_FIELDS_NOT_ON_PAGES_PROJ",
+    "category" : "OBSOLETE",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Record fields that are not present on pages in the project",
+    "level" : "3",
+    "sql" : "SELECT \n  DISTINCT B.RECNAME, \n  B.FIELDNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND A.PROJECTNAME = : 1 \n  AND B.SUBRECORD <> 'Y' \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPNLFIELD C, \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 5 \n      AND C.PNLNAME = D.OBJECTVALUE1 \n      AND B.FIELDNAME = C.FIELDNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

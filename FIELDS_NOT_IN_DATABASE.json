@@ -1,0 +1,21 @@
+{
+    "id" : "FIELDS_NOT_IN_DATABASE",
+    "category" : "MISSING_DB",
+    "element" : "FIELD",
+    "status" : "A",
+    "description" : "Fields in the project that do not exist in the database",
+    "level" : "2",
+    "sql" : "SELECT \n  A.OBJECTVALUE1 \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.OBJECTTYPE = 2 \n  AND A.OBJECTID2 = 0 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSDBFIELD B \n    WHERE \n      B.FIELDNAME = A.OBJECTVALUE1\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "ORPHAN_FIELD"
+        }
+    ],
+    "prompts" : [
+    ]
+}

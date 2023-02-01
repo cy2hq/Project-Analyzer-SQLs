@@ -1,0 +1,21 @@
+{
+    "id" : "RECORD_VIEWS_WITHOUT_RECORD",
+    "category" : "OBSOLETE",
+    "element" : "SQL",
+    "status" : "A",
+    "description" : "Record Views without records in the project",
+    "level" : "4",
+    "sql" : "SELECT A.OBJECTVALUE1\nFROM PSPROJECTITEM A\nWHERE A.PROJECTNAME = :1\n	AND A.OBJECTTYPE = 30\n	AND A.OBJECTID1 = 65\n	AND A.OBJECTID2 = 81\n	AND A.OBJECTVALUE2 = 2\n	AND NOT EXISTS (\n		SELECT 'X'\n		FROM PSPROJECTITEM B\n		WHERE B.PROJECTNAME = A.PROJECTNAME\n			AND B.OBJECTTYPE = 0\n			AND B.OBJECTID1 = 1\n			AND B.OBJECTVALUE1 = A.OBJECTVALUE1\n		)",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "SQL NAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

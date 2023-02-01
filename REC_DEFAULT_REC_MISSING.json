@@ -1,0 +1,26 @@
+{
+    "id" : "REC_DEFAULT_REC_MISSING",
+    "category" : "MISSING_DB",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Records with a default record that is missing from the database",
+    "level" : "4",
+    "sql" : "SELECT \n  B.RECNAME, \n  B.DEFRECNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B, \n  PSRECDEFN E \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND B.DEFRECNAME <> ' ' \n  AND B.DEFRECNAME = E.RECNAME \n  AND E.LASTUPDOPRID <> 'PPLSOFT' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C WHERE C.RECNAME = B.DEFRECNAME \n    )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "DEFRECNAME",
+            "alias" : "DEFRECNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

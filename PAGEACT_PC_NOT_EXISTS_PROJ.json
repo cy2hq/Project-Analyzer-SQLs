@@ -1,0 +1,26 @@
+{
+    "id" : "PAGEACT_PC_NOT_EXISTS_PROJ",
+    "category" : "MISSING_PROJECT",
+    "element" : "PEOPLECODE",
+    "status" : "A",
+    "description" : "Page Activate PeopleCode missing in the project",
+    "level" : "3",
+    "sql" : "SELECT  \n  B.PNLNAME, \n  C.PCTEXT \nFROM \n  PSPROJECTITEM A, \n  PSPNLDEFN B, \n  PSPCMTXT C \nWHERE \n  A.OBJECTTYPE = 5 \n  AND B.PNLNAME = A.OBJECTVALUE1 \n  AND B.PNLNAME = C.OBJECTVALUE1 \n  AND C.OBJECTID1 = 9 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM D, \n      PSPCMTXT E \n    WHERE \n      D.OBJECTTYPE = 44 \n      AND D.OBJECTVALUE1 = E.OBJECTVALUE1 \n      AND D.OBJECTVALUE2 = E.OBJECTVALUE2 \n      AND D.OBJECTID1 = E.OBJECTID1 \n      AND D.OBJECTID2 = E.OBJECTID2 \n      AND E.OBJECTVALUE1 = B.PNLNAME \n      AND D.PROJECTNAME = A.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "PCTEXT",
+            "alias" : "PCTEXT"
+        }
+    ],
+    "prompts" : [
+    ]
+}

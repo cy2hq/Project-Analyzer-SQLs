@@ -1,0 +1,31 @@
+{
+    "id" : "FIELDS_MISSING_XLATS_PROJ",
+    "category" : "MISSING_PROJECT",
+    "element" : "FIELD",
+    "status" : "A",
+    "description" : "Fields in the project missing translate values in the same project",
+    "level" : "4",
+    "sql" : "SELECT \n  A.FIELDNAME, \n  A.FIELDVALUE, \n  A.EFFDT \nFROM \n  PSXLATITEM A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 2 \n  AND B.OBJECTVALUE1 = A.FIELDNAME \n  AND B.OBJECTID2 = 0 \n  AND A.LASTUPDOPRID <> 'PPLSOFT' \n  AND B.PROJECTNAME = :1\n  AND NOT EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE C.OBJECTTYPE = 4 \n      AND C.OBJECTID1 = 6 \n      AND C.OBJECTVALUE1 = A.FIELDNAME \n      AND C.OBJECTID2 = 22 \n      AND C.OBJECTVALUE2 = A.FIELDVALUE \n      AND C.OBJECTID3 = 21 \n      AND %DATEIN(C.OBJECTVALUE3) = A.EFFDT\n      AND C.PROJECTNAME = B.PROJECTNAME \n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "FIELDVALUE",
+            "alias" : "FIELDVALUE"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "EFFDT",
+            "alias" : "EFFDT"
+        }
+    ],
+    "prompts" : [
+    ]
+}

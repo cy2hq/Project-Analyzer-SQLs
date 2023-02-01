@@ -1,0 +1,26 @@
+{
+    "id" : "PAGE_FIELDS_NOT_EXISTS_PROJ",
+    "category" : "MISSING_PROJECT",
+    "element" : "FIELD",
+    "status" : "A",
+    "description" : "Panel fields where fields are not in the project",
+    "level" : "3",
+    "sql" : "SELECT \n  A.PNLNAME, \n  A.FIELDNAME \nFROM \n  PSPNLFIELD A, \n  PSPROJECTITEM B, \n PSDBFIELD C\nWHERE \n  B.OBJECTTYPE = 5 \n  AND A.PNLNAME = B.OBJECTVALUE1 \n  AND A.FIELDNAME <> ' ' \nAND A.FIELDNAME = C.FIELDNAME\nAND C.LASTUPDOPRID <> 'PPLSOFT' \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 2 \n      AND C.OBJECTID2 = 0 \n      AND C.OBJECTVALUE1 = A.FIELDNAME \n      AND B.PROJECTNAME = C.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}
