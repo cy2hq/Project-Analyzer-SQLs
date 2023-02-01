@@ -2,5 +2,2490 @@
   "meta": {
     "version": "1.0.1"
   },
-  "data": []
+  "data": [
+    {
+      "id": "CI_NO_PERMISSIONS",
+      "category": "AUDIT",
+      "element": "COMPINTERF",
+      "status": "A",
+      "description": "Component Interface is not on a Permission List",
+      "level": "4",
+      "sql": "SELECT \n  B.BCNAME \n \nFROM \n  PSPROJECTITEM A, \n  PSBCDEFN B \nWHERE \n  A.OBJECTVALUE1 = B.BCNAME\n   AND A.PROJECTNAME = : 1 \n  and objecttype = 32\n and bcname NOT IN\n(SELECT bcname FROM PSAUTHBUSCOMP)",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "BCNAME",
+          "alias": "COMPONENT INTERFAC"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "COMP_ADDLINK_MSG_CAT_MISSING",
+      "category": "MISSING_PROJECT",
+      "element": "MESS_CAT",
+      "status": "A",
+      "description": "Component Add Link missing message catalog in project",
+      "level": "4",
+      "sql": "SELECT \n  A.ADDLINKMSGSET, \n  A.ADDLINKMSGNUM \nFROM \n  PSPNLGRPDEFN A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 7 \n  AND B.OBJECTID1 = 10 \n  AND B.OBJECTVALUE1 = A.PNLGRPNAME \n  AND A.ADDLINKMSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.ADDLINKMSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.ADDLINKMSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "ADDLINKMSGSET",
+          "alias": "ADDLINKMSGSET"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "ADDLINKMSGNUM",
+          "alias": "ADDLINKMSGNUM"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "COMP_INTFC_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "COMPINTERF",
+      "status": "A",
+      "description": "Component Interfaces in PeopleCode that do not exist in the database.",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'COMPINTFC' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSBCDEFN C \n    WHERE \n      B.REFNAME = C.BCNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_CI_NAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "COMP_KWRDSRCH_MESS_CAT_MISSING",
+      "category": "MISSING_PROJECT",
+      "element": "MESS_CAT",
+      "status": "A",
+      "description": "Component Keyword Search missing message catalog in project",
+      "level": "4",
+      "sql": "SELECT \n  A.PTKEYWDSRCHMSGSET, \n  A.PTKEYWDSRCHMSGNUM \nFROM \n  PSPNLGRPDEFNEXT A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 7 \n  AND B.OBJECTID1 = 10 \n  AND B.OBJECTVALUE1 = A.PNLGRPNAME \n  AND A.PTKEYWDSRCHMSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.PTKEYWDSRCHMSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.PTKEYWDSRCHMSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PTKEYWDSRCHMSGSET",
+          "alias": "PTKEYWDSRCHMSGSET"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PTKEYWDSRCHMSGNUM",
+          "alias": "PTKEYWDSRCHMSGNUM"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "COMP_MISSING_DESCR",
+      "category": "MISSING_DB",
+      "element": "COMPONENT",
+      "status": "A",
+      "description": "Component missing description",
+      "level": "4",
+      "sql": "SELECT B.PNLGRPNAME, B.DESCR\nFROM PSPROJECTITEM A \nJOIN PSPNLGRPDEFN B \nON A.OBJECTVALUE1 = B.PNLGRPNAME\nwhere\nA.OBJECTTYPE = 7 \nAND A.PROJECTNAME = :1\nAND (B.DESCR IS NULL  or B.DESCR = ' ' )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLGRPNAME",
+          "alias": "PNLGRPNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DESCR",
+          "alias": "DESCR"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "COMP_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "COMPONENT",
+      "status": "A",
+      "description": "Components in PeopleCode that do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'COMPONENT' \nAND A.PROJECTNAME = :1\n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPNLGRPDEFN C \n    WHERE \n      B.REFNAME = C.PNLGRPNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_COMPONENT"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "COMP_RTSRCHLN_MESS_CAT_MISSING",
+      "category": "MISSING_PROJECT",
+      "element": "MESS_CAT",
+      "status": "A",
+      "description": "Component Real time search link missing message catalog in project",
+      "level": "4",
+      "sql": "SELECT \n  A.PTRTSRCHLINKMSGSET, \n  A.PTRTSRCHLINKMSGNUM \nFROM \n  PSPNLGRPDEFNEXT A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 7 \n  AND B.OBJECTID1 = 10 \n  AND B.OBJECTVALUE1 = A.PNLGRPNAME \n  AND A.PTRTSRCHLINKMSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.PTRTSRCHLINKMSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.PTRTSRCHLINKMSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PTRTSRCHLINKMSGSET",
+          "alias": "PTRTSRCHLINKMSGSET"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PTRTSRCHLINKMSGNUM",
+          "alias": "PTRTSRCHLINKMSGNUM"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "COMP_SRCHLINK_MSG_CAT_MISSING",
+      "category": "MISSING_PROJECT",
+      "element": "MESS_CAT",
+      "status": "A",
+      "description": "Component Search Link missing message catalog in project",
+      "level": "4",
+      "sql": "SELECT \n  A.SRCHLINKMSGSET, \n  A.SRCHLINKMSGNUM \nFROM \n  PSPNLGRPDEFN A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 7 \n  AND B.OBJECTID1 = 10 \n  AND B.OBJECTVALUE1 = A.PNLGRPNAME \n  AND A.SRCHLINKMSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.SRCHLINKMSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.SRCHLINKMSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "SRCHLINKMSGSET",
+          "alias": "SRCHLINKMSGSET"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "SRCHLINKMSGNUM",
+          "alias": "SRCHLINKMSGNUM"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "COMP_SRCHTEXT_MSG_CAT_MISSING",
+      "category": "MISSING_PROJECT",
+      "element": "MESS_CAT",
+      "status": "A",
+      "description": "Component Search Text missing message catalog in project",
+      "level": "4",
+      "sql": "SELECT \n  A.SRCHTEXTMSGSET, \n  A.SRCHTEXTMSGNUM \nFROM \n  PSPNLGRPDEFN A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 7 \n  AND B.OBJECTID1 = 10 \n  AND B.OBJECTVALUE1 = A.PNLGRPNAME \n  AND A.SRCHTEXTMSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.SRCHTEXTMSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.SRCHTEXTMSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "SRCHTEXTMSGSET",
+          "alias": "SRCHTEXTMSGSET"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "SRCHTEXTMSGNUM",
+          "alias": "SRCHTEXTMSGNUM"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "COMP_WITHOUT_REG",
+      "category": "MISSING_DB",
+      "element": "COMPONENT",
+      "status": "A",
+      "description": "Components without portal registration in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.PNLGRPNAME, \n  B.DESCR \nFROM \n  PSPROJECTITEM A, \n  PSPNLGRPDEFN B \nWHERE \n  B.PNLGRPNAME = A.OBJECTVALUE1 \n  AND B.MARKET = A.OBJECTVALUE2 \n  AND A.OBJECTTYPE = 7 \n  AND A.PROJECTNAME = :1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPRSMDEFN C \n    WHERE \n      B.PNLGRPNAME = C.PORTAL_URI_SEG2\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLGRPNAME",
+          "alias": "MISSING_COMPONENT"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DESCR",
+          "alias": "DESCR"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "COMP_WITHOUT_REG_PROJECT",
+      "category": "MISSING_PROJECT",
+      "element": "COMPONENT",
+      "status": "A",
+      "description": "Components without a portal registry item in the same project",
+      "level": "2",
+      "sql": "SELECT \n  B.PNLGRPNAME, \n  B.DESCR \nFROM \n  PSPROJECTITEM A, \n  PSPNLGRPDEFN B \nWHERE \n  B.PNLGRPNAME = A.OBJECTVALUE1 \n  AND B.MARKET = A.OBJECTVALUE2 \n  AND A.OBJECTTYPE = 7 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C, \n      PSPRSMDEFN D \n    WHERE \n      C.OBJECTTYPE = 55 \n      AND C.OBJECTID1 = 99 \n      AND C.OBJECTVALUE1 = D.PORTAL_NAME \n      AND C.OBJECTID2 = 100 \n      AND C.OBJECTVALUE2 = D.PORTAL_REFTYPE \n      AND C.OBJECTID3 = 101 \n      AND C.OBJECTVALUE3 = D.PORTAL_OBJNAME \n      AND A.PROJECTNAME = C.PROJECTNAME \n      AND B.PNLGRPNAME = D.PORTAL_URI_SEG2\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLGRPNAME",
+          "alias": "PNLGRPNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DESCR",
+          "alias": "DESCR"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "CY2_BARNAME_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "MENU",
+      "status": "A",
+      "description": "Barname in PeopleCode that does not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'BARNAME' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSMENUITEM C \n    WHERE \n      B.REFNAME = C.BARNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_BARNAME"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELDNAME_IN_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Fields by fieldname in PeopleCode do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.RECNAME, \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME NOT IN (\n    'FIELD', 'PACKAGE', 'RECORD', 'SCROLL', \n    'PAGE', 'COMPONENT', 'PANELGROUP', \n    'PANEL', 'SQL', 'MENUNAME', 'ITEMNAME', \n    'BARNAME', 'HTML', 'IMAGE', 'OPERATION', \n    'FILELAYOUT', 'COMPINTFC', 'STYLESHEET', \n    'MESSAGE', 'BUSEVENT', 'URL', 'BUSACTIVITY', \n    'BUSPROCESS', 'INTERLINK', 'PORTAL', \n    'NODE'\n  ) \n  AND B.REFNAME <> ' ' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSDBFIELD C \n    WHERE \n      B.REFNAME = C.FIELDNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "REFNAME",
+          "alias": "FIELD"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 6,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELDS_MISSING_XLATS_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Fields in the project missing translate values in the same project",
+      "level": "4",
+      "sql": "SELECT \n  A.FIELDNAME, \n  A.FIELDVALUE, \n  A.EFFDT \nFROM \n  PSXLATITEM A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 2 \n  AND B.OBJECTVALUE1 = A.FIELDNAME \n  AND B.OBJECTID2 = 0 \n  AND A.LASTUPDOPRID <> 'PPLSOFT' \n  AND B.PROJECTNAME = :1\n  AND NOT EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE C.OBJECTTYPE = 4 \n      AND C.OBJECTID1 = 6 \n      AND C.OBJECTVALUE1 = A.FIELDNAME \n      AND C.OBJECTID2 = 22 \n      AND C.OBJECTVALUE2 = A.FIELDVALUE \n      AND C.OBJECTID3 = 21 \n      AND %DATEIN(C.OBJECTVALUE3) = A.EFFDT\n      AND C.PROJECTNAME = B.PROJECTNAME \n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "FIELDVALUE",
+          "alias": "FIELDVALUE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "EFFDT",
+          "alias": "EFFDT"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELDS_MISSING_XLAT_LASTUPDDTM",
+      "category": "MISSING_PROJECT",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Fields with missing xlat values based on lastupddtm in the project",
+      "level": "4",
+      "sql": "SELECT \n  A.FIELDNAME, \n  A.FIELDVALUE, \n  A.EFFDT \nFROM \n  PSXLATITEM A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 2 \n  AND B.OBJECTVALUE1 = A.FIELDNAME \n AND B.OBJECTID2 = 0 \n  AND B.PROJECTNAME = :1\n AND A.LASTUPDDTTM >= %CurrentDateTimeIn - (:2)\n  AND NOT EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE C.OBJECTTYPE = 4 \n      AND C.OBJECTID1 = 6 \n      AND C.OBJECTVALUE1 = A.FIELDNAME \n      AND C.OBJECTID2 = 22 \n      AND C.OBJECTVALUE2 = A.FIELDVALUE \n      AND C.OBJECTID3 = 21 \n      AND TO_DATE(C.OBJECTVALUE3,'YYYY-MM-DD') = A.EFFDT\n      AND C.PROJECTNAME = B.PROJECTNAME \n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "FIELDVALUE",
+          "alias": "FIELDVALUE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "EFFDT",
+          "alias": "EFFDT"
+        }
+      ],
+      "prompts": [
+        {
+          "promptNumber": 2,
+          "field": "DAYS_BEFORE",
+          "default": "90"
+        }
+      ]
+    },
+    {
+      "id": "FIELDS_NOT_IN_DATABASE",
+      "category": "MISSING_DB",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Fields in the project that do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  A.OBJECTVALUE1 \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.OBJECTTYPE = 2 \n  AND A.OBJECTID2 = 0 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSDBFIELD B \n    WHERE \n      B.FIELDNAME = A.OBJECTVALUE1\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "ORPHAN_FIELD"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELDS_NOT_IN_RECORDS",
+      "category": "OBSOLETE",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Fields in the project that are not in records in the same project",
+      "level": "3",
+      "sql": "SELECT \n  B.FIELDNAME \nFROM \n  PSPROJECTITEM A, \n  PSDBFIELD B \nWHERE \n  A.OBJECTTYPE = 2 \n  AND A.OBJECTVALUE1 = B.FIELDNAME \n  AND A.OBJECTID2 = 0 \n  AND A.PROJECTNAME =: 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECFIELD C, \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 0 \n      AND C.SUBRECORD = 'N' \n      AND C.RECNAME = D.OBJECTVALUE1 \n      AND B.FIELDNAME = C.FIELDNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELDS_NOT_ON_PAGES",
+      "category": "OBSOLETE",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Fields in the project that do not exist on pages in the project",
+      "level": "2",
+      "sql": "SELECT \n  B.FIELDNAME \nFROM \n  PSPROJECTITEM A, \n  PSDBFIELD B \nWHERE \n  A.OBJECTTYPE = 2 \n  AND A.OBJECTVALUE1 = B.FIELDNAME \n  AND A.OBJECTID2 = 0 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPNLFIELD C, \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 5 \n      AND C.PNLNAME = D.OBJECTVALUE1 \n      AND B.FIELDNAME = C.FIELDNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELDS_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Fields in PeopleCode that do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'FIELD' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSDBFIELD C \n    WHERE \n      B.REFNAME = C.FIELDNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_FIELD"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "OBJECTVALUE1"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELDS_STATIC_LABELS",
+      "category": "AUDIT",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Fields with a static label on pages in the project",
+      "level": "2",
+      "sql": "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.PNLFIELDNAME, \n  A.RECNAME, \n  A.FIELDNAME \nFROM \n  PSPNLFIELD A, \n  PSPNLFIELDEXT B, \n  PSPROJECTITEM C \nWHERE \n  A.PNLNAME = B.PNLNAME \n  AND A.PNLFLDID = B.PNLFLDID \n  AND LBLTYPE = 1 \n  AND B.GRPBOXTYPE <> 5 \n  AND A.LBLTEXT <> ' ' \n  AND A.PNLNAME = C.OBJECTVALUE1 \n  AND C.OBJECTTYPE = 5 \n  AND C.PROJECTNAME = : 1",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PNLFLDID",
+          "alias": "PNLFLDID"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "PNLFIELDNAME",
+          "alias": "PNLFIELDNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELDS_STATIC_PLACEHOLDER_FL",
+      "category": "AUDIT",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Fields with a static placeholder text in the project (Fluid)",
+      "level": "2",
+      "sql": "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.FIELDNUM, \n  A.PNLFIELDNAME, \n  A.LABEL_ID, \n  A.LBLTEXT, \n  A.RECNAME, \n  A.FIELDNAME, \n  B.PLHTYPE, \n  B.PLACEHOLDER \nFROM \n  PSPNLFIELD A, \n  PSPNLFIELDEXT B, \n  PSPROJECTITEM C \nWHERE \n  A.PNLNAME = B.PNLNAME \n  AND A.PNLFLDID = B.PNLFLDID \n  AND A.PNLNAME = C.OBJECTVALUE1 \n  AND C.OBJECTTYPE = 5 \n  AND PLHTYPE = 1 \n  AND C.PROJECTNAME = : 1",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PNLFLDID",
+          "alias": "PNLFLDID"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "PNLFIELDNAME",
+          "alias": "PNLFIELDNAME"
+        },
+        {
+          "sequenceNumber": 7,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 9,
+          "fieldName": "PLHTYPE",
+          "alias": "PLHTYPE"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "FIELDNUM",
+          "alias": "FIELDNUM"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "LABEL_ID",
+          "alias": "LABEL_ID"
+        },
+        {
+          "sequenceNumber": 6,
+          "fieldName": "LBLTEXT",
+          "alias": "LBLTEXT"
+        },
+        {
+          "sequenceNumber": 8,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        },
+        {
+          "sequenceNumber": 10,
+          "fieldName": "PLACEHOLDER",
+          "alias": "PLACEHOLDER"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELD_LABEL_NOT_FIELD_NAME",
+      "category": "AUDIT",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Field label IDs that do not match the field name",
+      "level": "3",
+      "sql": "SELECT \n  A.FIELDNAME, \n  A.LABEL_ID \nFROM \n  PSDBFLDLABL A, \n  PSDBFIELD B, \n  PSPROJECTITEM C \nWHERE \n  B.FIELDNAME = A.FIELDNAME \n  AND C.OBJECTTYPE = 2 \n  AND C.OBJECTID2 = 0 \n  AND C.OBJECTVALUE1 = A.FIELDNAME \n  AND C.PROJECTNAME = : 1 \n  AND B.LASTUPDOPRID <> 'PPLSOFT' \n  AND A.LABEL_ID <> A.FIELDNAME",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "LABEL_ID",
+          "alias": "LABEL_ID"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELD_LABEL_NOT_FIELD_NAME_LNG",
+      "category": "AUDIT",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Field label IDs that do not match the field name in related language",
+      "level": "3",
+      "sql": "SELECT \n  A.FIELDNAME, \n  A.LABEL_ID \nFROM \n  PSDBFLDLABLLANG A, \n  PSDBFIELD B, \n  PSPROJECTITEM C \nWHERE \n  B.FIELDNAME = A.FIELDNAME \n  AND C.OBJECTTYPE = 2 \n  AND C.OBJECTID2 = 0 \n  AND C.OBJECTVALUE1 = A.FIELDNAME \n  AND C.PROJECTNAME = : 1 \n  AND B.LASTUPDOPRID <> 'PPLSOFT' \n  AND A.LABEL_ID <> A.FIELDNAME",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "LABEL_ID",
+          "alias": "LABEL_ID"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FIELD_NOT_IN_RECORDS",
+      "category": "OBSOLETE",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Fields that do not exist in records in the database",
+      "level": "3",
+      "sql": "SELECT \n  B.FIELDNAME \nFROM \n  PSPROJECTITEM A, \n  PSDBFIELD B \nWHERE \n  A.OBJECTTYPE = 2 \n  AND A.OBJECTVALUE1 = B.FIELDNAME \n  AND A.OBJECTID2 = 0 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECFIELD C \n    WHERE \n      B.FIELDNAME = C.FIELDNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "FILELAYOUT_IN_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "FILELAYOUT",
+      "status": "A",
+      "description": "FileLayouts in PeopleCode that do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'FILELAYOUT' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSFLDDEFN C \n    WHERE \n      B.REFNAME = C.FLDDEFNNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_FILELAYOUT"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "HTML_HARDCODED",
+      "category": "AUDIT",
+      "element": "HTML",
+      "status": "A",
+      "description": "Hardcoded HTML in project",
+      "level": "2",
+      "sql": "SELECT \n  A.PNLNAME, \n  A.PNLFLDID \nFROM \n  PSPNLHTMLAREA A, \n  PSPROJECTITEM B, \n  PSPNLDEFN C \nWHERE \n  B.OBJECTTYPE = 5 \n  AND C.PNLNAME = B.OBJECTVALUE1 \n  AND C.PNLNAME = A.PNLNAME \n  AND B.PROJECTNAME = : 1",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PNLFLDID",
+          "alias": "PNLFLDID"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "HTML_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "HTML",
+      "status": "A",
+      "description": "HTML in PeopleCode that does not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'HTML' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSCONTDEFN C \n    WHERE \n      B.REFNAME = C.CONTNAME \n      AND C.CONTTYPE = 4\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_HTML"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "IB_MESSAGE_IN_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "IB_MESSAGE",
+      "status": "A",
+      "description": "IB Messages in PeopleCode that do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'MESSAGE' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSMSGDEFN C \n    WHERE \n      B.REFNAME = C.MSGNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_IB_MSG"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "IB_NODE_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "IB_NODE",
+      "status": "A",
+      "description": "IB Nodes in PeopleCode that do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'NODE' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSMSGNODEDEFN C \n    WHERE \n      B.REFNAME = C.MSGNODENAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_IB_NODES"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "IB_OPERATION_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "IB_OPERATN",
+      "status": "A",
+      "description": "IB Operations in PeopleCode that do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'OPERATION' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSOPERATION C \n    WHERE \n      B.REFNAME = C.IB_OPERATIONNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_IB_OPS"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "IMAGE_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "IMAGE",
+      "status": "A",
+      "description": "Images in PeopleCode that do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'IMAGE' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSCONTDEFN C \n    WHERE \n      B.REFNAME = C.CONTNAME \n      AND C.CONTTYPE = 1\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_IMAGE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "INTERLINK_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "INTERLINK",
+      "status": "A",
+      "description": "Interlinks in PeopleCode that do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'INTERLINK' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSIODEFN C \n    WHERE \n      B.REFNAME = C.IONAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_INTERLINK"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "ITEMNAME_IN_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "MENU",
+      "status": "A",
+      "description": "Menu Item Name in PeopleCode that does not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'ITEMNAME' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSMENUITEM C \n    WHERE \n      B.REFNAME = C.ITEMNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_ITEM_NAME"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "MENUNAME_IN_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "MENU",
+      "status": "A",
+      "description": "Menuname in PeopleCode that does not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'MENUNAME' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSMENUDEFN C \n    WHERE \n      B.REFNAME = C.MENUNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_MENU"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "MESS_CAT_GRID_NOT_EXISTS_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "MESS_CAT",
+      "status": "A",
+      "description": "Message Catalog entries in grid not existing in the project",
+      "level": "4",
+      "sql": "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.MSGSET, \n  A.MSGNUM \nFROM \n  PSPNLBTNDATA A, \n  PSPROJECTITEM B \nWHERE \n  A.PNLNAME = B.OBJECTVALUE1 \n  AND B.OBJECTTYPE = 5 \n  AND A.MSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.MSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.MSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "MSGSET",
+          "alias": "MSGSET"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PNLFLDID",
+          "alias": "PNLFLDID"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "MSGNUM",
+          "alias": "MSGNUM"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "MESS_CAT_GRID_NOT_EXISTS_PROJ2",
+      "category": "MISSING_PROJECT",
+      "element": "MESS_CAT",
+      "status": "A",
+      "description": "Message Catalog entries in grid not existing in the project part 2",
+      "level": "4",
+      "sql": "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.PTBTNMSGSET2, \n  A.PTBTNMSGNUM2 \nFROM \n  PSPNLBTNDATA A, \n  PSPROJECTITEM B \nWHERE \n  A.PNLNAME = B.OBJECTVALUE1 \n  AND B.OBJECTTYPE = 5 \n  AND A.PTBTNMSGSET2 > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.PTBTNMSGSET2 \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.PTBTNMSGNUM2 \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PNLFLDID",
+          "alias": "PNLFLDID"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "PTBTNMSGNUM2",
+          "alias": "PTBTNMSGNUM2"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "PTBTNMSGSET2",
+          "alias": "PTBTNMSGSET2"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "MESS_CAT_PAGES_NOT_EXISTS_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "MESS_CAT",
+      "status": "A",
+      "description": "Message Catalog entries on pages that do not exist in the project",
+      "level": "4",
+      "sql": "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.GRDLBLMSGSET, \n  A.GRDLBLMSGNUM \nFROM \n  PSPNLFIELD A, \n  PSPROJECTITEM B \nWHERE \n  A.PNLNAME = B.OBJECTVALUE1 \n  AND B.OBJECTTYPE = 5 \n  AND A.GRDLBLMSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.GRDLBLMSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.GRDLBLMSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PNLFLDID",
+          "alias": "PNLFLDID"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "GRDLBLMSGSET",
+          "alias": "GRDLBLMSGSET"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "GRDLBLMSGNUM",
+          "alias": "GRDLBLMSGNUM"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "MESS_CAT_PC_NOT_EXISTS_PROJECT",
+      "category": "MISSING_PROJECT",
+      "element": "MESS_CAT",
+      "status": "A",
+      "description": "Message catalog entries in PeopleCode missing in project",
+      "level": "4",
+      "sql": "SELECT \n  A.MESSAGE_SET_NBR, \n  A.MESSAGE_NBR, \n  C.OBJECTVALUE1, \n  C.OBJECTVALUE2, \n  C.OBJECTVALUE3, \n  C.OBJECTVALUE4 \nFROM \n  PSMSGCATDEFN A, \n  PSPCMTXT B, \n  PSPROJECTITEM C \nWHERE \n  C.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND C.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    C.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR C.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    C.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR C.OBJECTVALUE4 = ' '\n  ) \n  AND C.OBJECTID1 = B.OBJECTID1 \n  AND C.OBJECTID2 = B.OBJECTID2 \n  AND (\n    C.OBJECTID3 = B.OBJECTID3 \n    OR C.OBJECTID3 = 0\n  ) \n  AND (\n    C.OBJECTID4 = B.OBJECTID4 \n    OR C.OBJECTID4 = 0\n  ) \n  AND B.PCTEXT LIKE (\n    '%' || A.MESSAGE_SET_NBR || ', ' || A.MESSAGE_NBR || ',%'\n  ) \n  AND A.MESSAGE_SET_NBR > 20000 \n  AND C.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 25 \n      AND D.OBJECTID1 = 48 \n      AND D.OBJECTVALUE1 = A.MESSAGE_SET_NBR \n      AND D.OBJECTID2 = 49 \n      AND D.OBJECTVALUE2 = A.MESSAGE_NBR \n      AND D.PROJECTNAME = C.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "MESSAGE_SET_NBR",
+          "alias": "MESSAGE_SET_NBR"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "OBJECTVALUE1"
+        },
+        {
+          "sequenceNumber": 6,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "MESSAGE_NBR",
+          "alias": "MESSAGE_NBR"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "MISSING_COMMENTS",
+      "category": "AUDIT",
+      "element": "COMMENTS",
+      "status": "A",
+      "description": "Missing Comments in Properties",
+      "level": "4",
+      "sql": "SELECT 'Records' \"OBJECTID\", \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psrecdefn x\nWHERE p.projectname = :1\nAND x.recname = p.objectvalue1\nAND p.objecttype= 0\nAND (x.descrlong IS NULL OR objectownerid = ' ' OR recdescr = ' ')\nUNION\nSELECT 'Fields', \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psdbfield x\nWHERE p.projectname = :1\nAND x.fieldname = p.objectvalue1\nAND p.objecttype= 2\nAND (x.descrlong IS NULL OR objectownerid = ' ')\nUNION\nSELECT 'Pages',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.pspnldefn x\nWHERE p.projectname = :1\nAND x.pnlname = p.objectvalue1\nAND p.objecttype= 5\nAND (x.descrlong IS NULL OR objectownerid = ' ' OR descr = ' ')\nUNION\nSELECT 'Menus',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psmenudefn x\nWHERE p.projectname = :1\nAND x.menuname = p.objectvalue1\nAND p.objecttype= 6\nAND (x.descrlong IS NULL OR objectownerid = ' ' OR descr = ' ')\nUNION\nSELECT 'Components',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.pspnlgrpdefn x\nWHERE p.projectname = :1\nAND x.pnlgrpname = p.objectvalue1\nAND x.market = p.objectvalue2\nAND p.objecttype= 7\nAND (x.descrlong IS NULL OR objectownerid = ' ' OR descr = ' ')\nUNION\nSELECT 'Message Catalog Entries',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.PSMSGCATDEFN x\nWHERE p.projectname = :1\nAND x.message_set_nbr = p.objectvalue1\nAND x.message_nbr = p.objectvalue2\nAND p.objecttype= 25\nAND x.descrlong IS NULL\nUNION\nSELECT 'Application Engine Programs',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.PSAEAPPLDEFN x\nWHERE p.projectname = :1\nAND x.ae_applid = p.objectvalue1\nAND p.objecttype= 33\nAND (x.descrlong IS NULL OR objectownerid = ' ' OR descr = ' ')\nUNION\nSELECT 'Application Engine Sections',  \n       p.objectvalue1, p.objectvalue2, x.ae_step, ' '\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.PSAEAPPLDEFN s,\n                sysadm.psaestepdefn x\nWHERE p.projectname = :1\nAND x.ae_applid = p.objectvalue1\nAND x.ae_section = p.objectvalue2\nAND s.ae_applid = x.ae_applid\nAND p.objecttype= 34\nAND x.descrlong IS NULL\nUNION\nSELECT 'Query',  \n       p.objectvalue1, ' ',' ', ' '\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psqrydefn x\n              \nWHERE p.projectname = :1\nAND x.qryname = p.objectvalue1\n\nAND p.objecttype= 10\nAND x.descrlong IS NULL\n;",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTID",
+          "alias": "OBJECT TYPE"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "OBJECTVALUE1"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "MISSING_TRIGGER",
+      "category": "MISSING_DB",
+      "element": "TRIGGER",
+      "status": "A",
+      "description": "Trigger not created in Database",
+      "level": "4",
+      "sql": "SELECT DISTINCT TRIGGERNAME   from PSPROJECTITEM A, PSTRIGGERDEFN B   WHERE PROJECTNAME = :1\n AND   OBJECTVALUE1 = RECNAME\n AND OBJECTTYPE = 0\n    AND   NOT EXISTS (SELECT 'X' from ALL_TRIGGERS C WHERE (B.RECNAME =SUBSTR(TABLE_NAME,4,15) OR B.RECNAME = TABLE_NAME))\n    ;",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "TRIGGERNAME",
+          "alias": "TRIGGERNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "MISSING_TRIGGER_CONFIG",
+      "category": "AUDIT",
+      "element": "TRIGGER",
+      "status": "A",
+      "description": "Table not set up in PeopleTools>Utilities>Audit>Maintain Audit Triggers",
+      "level": "4",
+      "sql": "SELECT OBJECTVALUE1  FROM PSPROJECTITEM A, ALL_TRIGGERS B where PROJECTNAME = :1\nAND 'PS_'||OBJECTVALUE1 = TABLE_NAME\nAND OBJECTTYPE = 0\nAND A.OBJECTVALUE1 NOT in(SELECT RECNAME from PSTRIGGERDEFN);",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "RECNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGEACT_PC_NOT_EXISTS_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "PEOPLECODE",
+      "status": "A",
+      "description": "Page Activate PeopleCode missing in the project",
+      "level": "3",
+      "sql": "SELECT  \n  B.PNLNAME, \n  C.PCTEXT \nFROM \n  PSPROJECTITEM A, \n  PSPNLDEFN B, \n  PSPCMTXT C \nWHERE \n  A.OBJECTTYPE = 5 \n  AND B.PNLNAME = A.OBJECTVALUE1 \n  AND B.PNLNAME = C.OBJECTVALUE1 \n  AND C.OBJECTID1 = 9 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM D, \n      PSPCMTXT E \n    WHERE \n      D.OBJECTTYPE = 44 \n      AND D.OBJECTVALUE1 = E.OBJECTVALUE1 \n      AND D.OBJECTVALUE2 = E.OBJECTVALUE2 \n      AND D.OBJECTID1 = E.OBJECTID1 \n      AND D.OBJECTID2 = E.OBJECTID2 \n      AND E.OBJECTVALUE1 = B.PNLNAME \n      AND D.PROJECTNAME = A.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PCTEXT",
+          "alias": "PCTEXT"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGEACT_PC_NO_PAGE_IN_PROJ",
+      "category": "OBSOLETE",
+      "element": "PEOPLECODE",
+      "status": "A",
+      "description": "Page Activate PeopleCode without page in the project",
+      "level": "2",
+      "sql": "SELECT \n  C.PNLNAME, \n  B.PCTEXT \nFROM \n  PSPROJECTITEM A, \n  PSPCMTXT B, \n  PSPNLDEFN C \nWHERE \n  A.OBJECTTYPE = 44 \n  AND A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND B.OBJECTID1 = A.OBJECTID1 \n  AND B.OBJECTID2 = A.OBJECTID2 \n  AND B.OBJECTVALUE1 = C.PNLNAME \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM D, \n      PSPNLDEFN E \n    WHERE \n      D.OBJECTTYPE = 5 \n      AND E.PNLNAME = D.OBJECTVALUE1 \n      AND E.PNLNAME = C.PNLNAME \n      AND D.PROJECTNAME = A.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PCTEXT",
+          "alias": "PCTEXT"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGEFIELD_STYLE_CLASSES",
+      "category": "FLUID",
+      "element": "STYLECLASS",
+      "status": "A",
+      "description": "PageField style classes in project",
+      "level": "2",
+      "sql": "SELECT \n  A.PNLNAME, \n  A.RECNAME, \n  A.FIELDNAME, \n  A.FIELDNUM, \n  B.FFSTYLELONG \nFROM \n  PSPNLFIELD A, \n  PSPNLFIELDEXT B \nWHERE \n  B.FFSTYLELONG NOT LIKE ' | | | | ' \n  AND B.FFSTYLELONG NOT LIKE ' ' \n  AND A.PNLNAME = B.PNLNAME \n  AND A.PNLFLDID = B.PNLFLDID \n  AND EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 5 \n      AND A.PNLNAME = C.OBJECTVALUE1 \n      AND C.PROJECTNAME = : 1\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 3,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "FFSTYLELONG",
+          "alias": "FFSTYLELONG"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "FIELDNUM",
+          "alias": "FIELDNUM"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGES_NOT_IN_COMPONENTS_DB",
+      "category": "OBSOLETE",
+      "element": "PAGE",
+      "status": "A",
+      "description": "Pages (normal / footer / header) not in components in the database but in the project",
+      "level": "4",
+      "sql": "SELECT A.OBJECTVALUE1,\n       B.DESCR\nFROM PSPROJECTITEM A\nJOIN PSPNLDEFN B ON A.OBJECTVALUE1 = B.PNLNAME\nWHERE A.OBJECTTYPE = 5\n  AND B.PNLTYPE IN (0,\n                    4,\n                    6)\n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLGROUP C\n     WHERE B.PNLNAME = C.PNLNAME)",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PAGE"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DESCR",
+          "alias": "DESCR"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGES_WITHOUT_COMPONENT",
+      "category": "MISSING_PROJECT",
+      "element": "PAGE",
+      "status": "A",
+      "description": "Pages without the component they are linked to in the project",
+      "level": "3",
+      "sql": "SELECT A.OBJECTVALUE1,\n       B.DESCR\nFROM PSPROJECTITEM A\nJOIN PSPNLDEFN B ON A.OBJECTVALUE1 = B.PNLNAME\nWHERE A.OBJECTTYPE = 5\n  AND B.PNLTYPE IN (0,\n                    4,\n                    6)\n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLGROUP C, PSPROJECTITEM D\n     WHERE B.PNLNAME = C.PNLNAME\n       AND C.PNLGRPNAME = D.OBJECTVALUE1\n       AND D.OBJECTTYPE = 7\n       AND D.OBJECTID1 = 10\n       AND D.PROJECTNAME = :1)",
+      "notes": "<p>Do we have pages in the project where the matching component is not in the project?&nbsp;Relevant in case you have pages that you actually did not wanted or in case you forgot to add the component.</p>",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PAGE"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DESCR",
+          "alias": "DESCR"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGE_FIELDS_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Page fields that do not exist in the database",
+      "level": "4",
+      "sql": "SELECT \n  A.PNLNAME, \n  A.FIELDNAME \nFROM \n  PSPNLFIELD A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 5 \n  AND A.PNLNAME = B.OBJECTVALUE1 \n  AND A.FIELDNAME <> ' ' \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSDBFIELD C \n    WHERE C.FIELDNAME = A.FIELDNAME \n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGE_FIELDS_NOT_EXISTS_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "FIELD",
+      "status": "A",
+      "description": "Panel fields where fields are not in the project",
+      "level": "3",
+      "sql": "SELECT \n  A.PNLNAME, \n  A.FIELDNAME \nFROM \n  PSPNLFIELD A, \n  PSPROJECTITEM B, \n PSDBFIELD C\nWHERE \n  B.OBJECTTYPE = 5 \n  AND A.PNLNAME = B.OBJECTVALUE1 \n  AND A.FIELDNAME <> ' ' \nAND A.FIELDNAME = C.FIELDNAME\nAND C.LASTUPDOPRID <> 'PPLSOFT' \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 2 \n      AND C.OBJECTID2 = 0 \n      AND C.OBJECTVALUE1 = A.FIELDNAME \n      AND B.PROJECTNAME = C.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGE_FIELD_LABEL_HARDCODED",
+      "category": "AUDIT",
+      "element": "PAGE",
+      "status": "A",
+      "description": "Page fields that use a hardcoded label",
+      "level": "4",
+      "sql": "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.FIELDNAME \nFROM \n  PSPNLFIELD A, \n  PSPNLFIELDEXT B, \n  PSPROJECTITEM C \nWHERE \n  A.PNLNAME = B.PNLNAME \n  AND A.PNLFLDID = B.PNLFLDID \n  AND a.LBLTYPE = 1 \n  AND B.GRPBOXTYPE <> 5 \n  AND A.LBLTEXT <> ' ' \n  AND A.PNLNAME = C.OBJECTVALUE1 \n  AND C.OBJECTTYPE = 5 \n  AND C.PROJECTNAME = : 1",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "PNLFLDID",
+          "alias": "PNLFLDID"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGE_MISSING_DESCR",
+      "category": "MISSING_DB",
+      "element": "PAGE",
+      "status": "A",
+      "description": "Page missing description",
+      "level": "4",
+      "sql": "SELECT A.OBJECTVALUE1, B.DESCR\nFROM PSPROJECTITEM A \nJOIN PSPNLDEFN B \nON A.OBJECTVALUE1 = B.PNLNAME\nwhere\nA.OBJECTTYPE = 5 \nAND A.PROJECTNAME = :1\nAND (B.DESCR IS NULL  or B.DESCR = ' ' )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DESCR",
+          "alias": "DESCR"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGE_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "PAGE",
+      "status": "A",
+      "description": "Pages in PeopleCode that do not exist in the database",
+      "level": "4",
+      "sql": "SELECT \n  DISTINCT B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'PAGE' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPNLDEFN C \n    WHERE \n      B.REFNAME = C.PNLNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_PAGES"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PAGE_STYLE_CLASSES",
+      "category": "FLUID",
+      "element": "STYLECLASS",
+      "status": "A",
+      "description": "Page StyleClasses in project",
+      "level": "2",
+      "sql": "select \n  A.PNLNAME, \n  A.FFSTYLEDESKTOP, \n  A.FFSTYLEPHONE, \n  A.FFSTYLETABLET, \n  A.FFSTYLEMEDIUM, \n  A.FFSTYLEEXLARGE \nfrom \n  PSPNLDEFN A \nWHERE \n  (\n    A.FFSTYLEDESKTOP <> ' ' \n    OR A.FFSTYLEPHONE <> ' ' \n    OR A.FFSTYLETABLET <> ' ' \n    OR A.FFSTYLEMEDIUM <> ' ' \n    OR A.FFSTYLEEXLARGE <> ' '\n  ) \n  AND EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM B \n    WHERE \n      B.OBJECTTYPE = 5 \n      AND A.PNLNAME = B.OBJECTVALUE1 \n      AND B.PROJECTNAME = : 1\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 4,
+          "fieldName": "FFSTYLETABLET",
+          "alias": "FFSTYLETABLET"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "PNLNAME",
+          "alias": "PNLNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "FFSTYLEDESKTOP",
+          "alias": "FFSTYLEDESKTOP"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "FFSTYLEPHONE",
+          "alias": "FFSTYLEPHONE"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "FFSTYLEMEDIUM",
+          "alias": "FFSTYLEMEDIUM"
+        },
+        {
+          "sequenceNumber": 6,
+          "fieldName": "FFSTYLEEXLARGE",
+          "alias": "FFSTYLEEXLARGE"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PANELS_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "PAGE",
+      "status": "A",
+      "description": "Panels in PeopleCode that do not exist in the database",
+      "level": "4",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'PANEL' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPNLDEFN C \n    WHERE \n      B.REFNAME = C.PNLNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_PANELS"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PNLGRP_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "COMPONENT",
+      "status": "A",
+      "description": "Panel Groups in PeopleCode that do not exist in the database",
+      "level": "2",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'PANELGROUP' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPNLGRPDEFN C \n    WHERE \n      B.REFNAME = C.PNLGRPNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_PNL_GRPS"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "PORTAL_PC_NOT_EXISTS",
+      "category": "MISSING_DB",
+      "element": "PORTAL_REG",
+      "status": "A",
+      "description": "Portal reference in PeopleCode that does not exist in the database",
+      "level": "4",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'PORTAL' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPRDMDEFN C \n    WHERE \n      B.REFNAME = C.PORTAL_NAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_PORTAL_REF"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "RECORDS_MISSING",
+      "category": "MISSING_DB",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Records in project that do not exist in the database",
+      "level": "4",
+      "sql": "SELECT  \n  A.OBJECTVALUE1 \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.PROJECTNAME = :1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN B \n    WHERE \n      B.RECNAME = A.OBJECTVALUE1\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "RECORD_NOT_BUILT"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "RECORDS_OBSOLETE_IN_PROJECT",
+      "category": "OBSOLETE",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Records that are obsolete in the project",
+      "level": "3",
+      "sql": "SELECT B.RECNAME\nFROM PSPROJECTITEM A,\n     PSRECDEFN B\nWHERE A.OBJECTTYPE = 0\n  AND A.OBJECTID1 = 1\n  AND A.OBJECTVALUE1 = B.RECNAME\n  AND A.OBJECTID2 = 0\n  AND A.PROJECTNAME = : 1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLFIELD C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 5\n       AND D.OBJECTID1 = 9\n       AND C.PNLNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.RECNAME\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSRECFIELD C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 0\n       AND D.OBJECTID1 = 1\n       AND C.RECNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.EDITTABLE\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSRECDEFN C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 0\n       AND D.OBJECTID1 = 1\n       AND C.RECNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.RELLANGRECNAME\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLGRPDEFN C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 7\n       AND D.OBJECTID1 = 10\n       AND C.PNLGRPNAME = D.OBJECTVALUE1\n       AND (B.RECNAME = C.SEARCHRECNAME\n            OR B.RECNAME = C.ADDSRCHRECNAME)\n       AND A.PROJECTNAME = D.PROJECTNAME )",
+      "notes": "<p>Records in the project that do not exist on a page in the project, do not exist as a prompt record for another record in the project, do not exist as a related language record for a another record in the project and do not exist as a search record for a component in the project.&nbsp;</p>",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "RECORD_VIEWS_WITHOUT_RECORD",
+      "category": "OBSOLETE",
+      "element": "SQL",
+      "status": "A",
+      "description": "Record Views without records in the project",
+      "level": "4",
+      "sql": "SELECT A.OBJECTVALUE1\nFROM PSPROJECTITEM A\nWHERE A.PROJECTNAME = :1\n\tAND A.OBJECTTYPE = 30\n\tAND A.OBJECTID1 = 65\n\tAND A.OBJECTID2 = 81\n\tAND A.OBJECTVALUE2 = 2\n\tAND NOT EXISTS (\n\t\tSELECT 'X'\n\t\tFROM PSPROJECTITEM B\n\t\tWHERE B.PROJECTNAME = A.PROJECTNAME\n\t\t\tAND B.OBJECTTYPE = 0\n\t\t\tAND B.OBJECTID1 = 1\n\t\t\tAND B.OBJECTVALUE1 = A.OBJECTVALUE1\n\t\t)",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "SQL NAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_DEFAULT_REC_MISSING",
+      "category": "MISSING_DB",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Records with a default record that is missing from the database",
+      "level": "4",
+      "sql": "SELECT \n  B.RECNAME, \n  B.DEFRECNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B, \n  PSRECDEFN E \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND B.DEFRECNAME <> ' ' \n  AND B.DEFRECNAME = E.RECNAME \n  AND E.LASTUPDOPRID <> 'PPLSOFT' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C WHERE C.RECNAME = B.DEFRECNAME \n    )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DEFRECNAME",
+          "alias": "DEFRECNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_DEFAULT_REC_MISSING_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Records with a default record where the default record is missing from the project",
+      "level": "3",
+      "sql": "SELECT \n  B.RECNAME, \n  B.DEFRECNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B, \n  PSRECDEFN E \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND B.DEFRECNAME <> ' ' \n  AND B.DEFRECNAME = E.RECNAME \n  AND E.LASTUPDOPRID <> 'PPLSOFT' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C, \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 0 \n      AND C.RECNAME = D.OBJECTVALUE1 \n      AND C.RECNAME = B.DEFRECNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DEFRECNAME",
+          "alias": "DEFRECNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_FELDS_MISSING_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Record Fields missing as fields in the project",
+      "level": "4",
+      "sql": "SELECT \n  DISTINCT B.RECNAME, \n  B.FIELDNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B, \n  PSDBFIELD C \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND A.PROJECTNAME = :1\n  AND B.FIELDNAME = C.FIELDNAME \n  AND C.LASTUPDOPRID <> 'PPLSOFT' \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM D, \n      PSDBFIELD E \n    WHERE \n      D.OBJECTTYPE = 2 \n      AND D.OBJECTVALUE1 = E.FIELDNAME \n      AND D.OBJECTID2 = 0 \n      AND B.FIELDNAME = E.FIELDNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_FIELDS_NOT_ON_PAGES_PROJ",
+      "category": "OBSOLETE",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Record fields that are not present on pages in the project",
+      "level": "3",
+      "sql": "SELECT \n  DISTINCT B.RECNAME, \n  B.FIELDNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND A.PROJECTNAME = : 1 \n  AND B.SUBRECORD <> 'Y' \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPNLFIELD C, \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 5 \n      AND C.PNLNAME = D.OBJECTVALUE1 \n      AND B.FIELDNAME = C.FIELDNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_MISSING_DESCR",
+      "category": "MISSING_DB",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Records with missing description",
+      "level": "4",
+      "sql": "SELECT \nA.OBJECTVALUE1, \nB.RECDESCR\nFROM PSPROJECTITEM A \nJOIN PSRECDEFN B \nON A.OBJECTVALUE1 = B.RECNAME\nWHERE\nA.OBJECTTYPE = 0 \nAND A.PROJECTNAME = :1\nAND (B.RECDESCR IS NULL  or B.RECDESCR = ' ' )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "RECDESCR",
+          "alias": "RECDESCR"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_MISSING_PROMPT_REC",
+      "category": "MISSING_DB",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Records with missing prompt tables in the database",
+      "level": "4",
+      "sql": "SELECT \n  B.RECNAME, \n  B.EDITTABLE \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B, \n  PSRECDEFN E \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND A.PROJECTNAME = : 1 \n  AND B.EDITTABLE <> ' ' \n  AND B.EDITTABLE = E.RECNAME \n  AND E.LASTUPDOPRID <> 'PPLSOFT' \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C\n      WHERE C.RECNAME = B.EDITTABLE \n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "MISSING_PROMPT"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "EDITTABLE",
+          "alias": "EDITTABLE"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_MISSING_PROMPT_REC_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Records with missing prompt records in the project",
+      "level": "4",
+      "sql": "SELECT \n  B.RECNAME, \n  B.EDITTABLE \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B, \n  PSRECDEFN E \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND A.PROJECTNAME = : 1 \n  AND B.EDITTABLE <> ' ' \n  AND B.EDITTABLE = E.RECNAME \n  AND E.LASTUPDOPRID <> 'PPLSOFT' \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C, \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 0 \n      AND C.RECNAME = D.OBJECTVALUE1 \n      AND C.RECNAME = B.EDITTABLE \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "EDITTABLE",
+          "alias": "EDITTABLE"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_MISSING_RELLANGREC",
+      "category": "MISSING_DB",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Related language records in records in the project, not existing in the database",
+      "level": "4",
+      "sql": "SELECT \n  B.RECNAME, \n  B.RELLANGRECNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECDEFN B \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND B.RELLANGRECNAME <> ' ' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C WHERE\n      C.RECNAME = B.RELLANGRECNAME \n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "RELLANGRECNAME",
+          "alias": "RELLANGRECNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_MISSING_RELLANGREC_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Related language records in records in the project, not existing in the project",
+      "level": "4",
+      "sql": "SELECT \n  B.RECNAME, \n  B.RELLANGRECNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECDEFN B \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND B.RELLANGRECNAME <> ' ' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C, \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 0 \n      AND C.RECNAME = D.OBJECTVALUE1 \n      AND C.RECNAME = B.RELLANGRECNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "RELLANGRECNAME",
+          "alias": "RELLANGRECNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_MISSING_SQLVIIEW_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Record views missing in the project",
+      "level": "4",
+      "sql": "SELECT \n  B.RECNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECDEFN B \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND B.RECTYPE = 1 \n  AND A.PROJECTNAME =: 1 \n  AND NOT EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 30 \n      AND C.OBJECTID1 = 65 \n      AND C.OBJECTVALUE2 = 2 \n      AND C.OBJECTVALUE1 = B.RECNAME \n      AND C.PROJECTNAME = A.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "RECNAME",
+          "alias": "RECNAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_MISS_QRYTREE",
+      "category": "MISSING_DB",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Records missing from Query Tree",
+      "level": "4",
+      "sql": "SELECT \n  B.QRYNAME, \n  B.RECNAME \nFROM \n  PSPROJECTITEM A, \n  PSQRYRECORD B \n WHERE \n A.OBJECTTYPE = 10 \n AND  A.OBJECTVALUE1 = B.QRYNAME\n  AND A.PROJECTNAME = :1\n  AND B.RECNAME NOT IN (SELECT TREE_NODE FROM  PSTREENODE WHERE TREE_NAME = 'QUERY_TREE_SKEMA');",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "QRYNAME",
+          "alias": "QUERY_NAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "RECNAME",
+          "alias": "RECORD_NAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_PC_MISSING",
+      "category": "MISSING_DB",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Records referenced in PeopleCode that are missing in the database",
+      "level": "4",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'RECORD' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C \n    WHERE \n      B.REFNAME = C.RECNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_RECORD"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_PC_RECNAME_MISSING",
+      "category": "MISSING_DB",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Record names referenced in PeopleCode that do not exist in the database",
+      "level": "4",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME NOT IN (\n    'FIELD', 'PACKAGE', 'RECORD', 'SCROLL', \n    'PAGE', 'COMPONENT', 'PANELGROUP', \n    'PANEL', 'SQL', 'MENUNAME', 'ITEMNAME', \n    'BARNAME', 'HTML', 'IMAGE', 'OPERATION', \n    'FILELAYOUT', 'COMPINTFC', 'STYLESHEET', \n    'MESSAGE', 'BUSEVENT', 'URL', 'BUSACTIVITY', \n    'BUSPROCESS', 'INTERLINK', 'PORTAL', \n    'NODE'\n  ) \n  AND B.RECNAME <> ' ' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C \n    WHERE \n      B.RECNAME = C.RECNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_RECORD"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "REC_PC_SCROLL_REC_MISSING",
+      "category": "MISSING_DB",
+      "element": "RECORD",
+      "status": "A",
+      "description": "Scroll records referenced in PeopleCode that do not exist in the database",
+      "level": "4",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'SCROLL' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C \n    WHERE \n      B.REFNAME = C.RECNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_SCROLL_REC"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "SQL_NOT_USED_IN_DB",
+      "category": "OBSOLETE",
+      "element": "SQL",
+      "status": "A",
+      "description": "Stand alone SQL statements in the project but not found in PeopleCode in the database",
+      "level": "3",
+      "sql": "SELECT \n  A.OBJECTVALUE1 \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.OBJECTTYPE = 30 \n  AND A.OBJECTID1 = 65 \n  AND A.OBJECTVALUE2 = 0 \n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPCMNAME C \n    WHERE \n      C.REFNAME = A.OBJECTVALUE1 \n      AND C.RECNAME = 'SQL'\n      )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "SQL NAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "SQL_NOT_USED_IN_PROJ",
+      "category": "OBSOLETE",
+      "element": "SQL",
+      "status": "A",
+      "description": "Stand alone SQL statements in the project but not used in PeopleCode",
+      "level": "3",
+      "sql": "SELECT \n  A.OBJECTVALUE1 \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.OBJECTTYPE = 30 \n  AND A.OBJECTID1 = 65 \n  AND A.OBJECTVALUE2 = 0 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM B, \n      PSPCMNAME C \n    WHERE \n      C.REFNAME = A.OBJECTVALUE1 \n      AND B.PROJECTNAME = A.PROJECTNAME \n      AND B.OBJECTVALUE1 = C.OBJECTVALUE1 \n      AND B.OBJECTVALUE2 = C.OBJECTVALUE2 \n      AND (\n        B.OBJECTVALUE3 = C.OBJECTVALUE3 \n        OR B.OBJECTVALUE3 = ' '\n      ) \n      AND (\n        B.OBJECTVALUE4 = C.OBJECTVALUE4 \n        OR B.OBJECTVALUE4 = ' '\n      ) \n      AND B.OBJECTID1 = C.OBJECTID1 \n      AND B.OBJECTID2 = C.OBJECTID2 \n      AND (\n        B.OBJECTID3 = C.OBJECTID3 \n        OR B.OBJECTID3 = 0\n      ) \n      AND (\n        B.OBJECTID4 = C.OBJECTID4 \n        OR B.OBJECTID4 = 0\n      ) \n      AND C.RECNAME = 'SQL'\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "SQL NAME"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "SQL_PC_MISSING",
+      "category": "MISSING_DB",
+      "element": "SQL",
+      "status": "A",
+      "description": "SQL statements referenced in PeopleCode but missing from the database",
+      "level": "4",
+      "sql": "SELECT \n  DISTINCT B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'SQL' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSSQLTEXTDEFN C \n    WHERE \n      B.REFNAME = C.SQLID\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        },
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_SQL_OBJ"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "SQL_PC_MISSING_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "SQL",
+      "status": "A",
+      "description": "SQL statements referenced in PeopleCode but missing from the project",
+      "level": "4",
+      "sql": "SELECT DISTINCT\n  B.REFNAME, \n  A.OBJECTVALUE1 AS \"THAT IS 1\", \n  A.OBJECTVALUE2 AS \"THAT IS 2\", \n  A.OBJECTVALUE3 AS \"THAT IS 3\", \n  A.OBJECTVALUE4 AS \"THAT IS 4\" \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'SQL' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 30 \n      AND C.OBJECTID1 = 65 \n      AND C.OBJECTVALUE2 = 0 \n      AND C.OBJECTVALUE1 = B.REFNAME \n      AND C.PROJECTNAME = A.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "REFNAME"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "OBJECTVALUE1"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "SQL_PC_NOT_EXISTS_PROJECT",
+      "category": "MISSING_PROJECT",
+      "element": "SQL",
+      "status": "A",
+      "description": "SQL statements referenced in PeopleCode but missing in the project",
+      "level": "4",
+      "sql": "SELECT \n  DISTINCT  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'SQL' \n  AND A.PROJECTNAME = : 1 \nAND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 30 \n      AND C.OBJECTID1 = 65 \n      AND C.OBJECTVALUE2 = 0 \n      AND C.OBJECTVALUE1 = B.REFNAME \n      AND C.PROJECTNAME = A.PROJECTNAME\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "REFNAME"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "OBJECTVALUE1"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "STYLESHEET_PC_MISSING",
+      "category": "MISSING_DB",
+      "element": "STYLESHEET",
+      "status": "A",
+      "description": "Stylesheet referenced in PeopleCode but not existing in the database",
+      "level": "4",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'STYLESHEET' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSCONTDEFN C \n    WHERE \n      B.REFNAME = C.CONTNAME \n      AND C.CONTTYPE = 9\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_STY_SHT"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "SUBPAGES_NOT_IN_PAGES_DB",
+      "category": "OBSOLETE",
+      "element": "PAGE",
+      "status": "A",
+      "description": "Subpages (sub / secundary) not in pages in the database but in the project",
+      "level": "4",
+      "sql": "SELECT A.OBJECTVALUE1,\n       B.DESCR\nFROM PSPROJECTITEM A\nJOIN PSPNLDEFN B ON A.OBJECTVALUE1 = B.PNLNAME\nWHERE A.OBJECTTYPE = 5\n  AND B.PNLTYPE IN (1,\n                    2)\n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLFIELD C\n     WHERE B.PNLNAME = C.SUBPNLNAME)",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "SUBPAGE"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DESCR",
+          "alias": "DESCR"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "SUBPAGES_WITHOUT_COMPONENT",
+      "category": "MISSING_PROJECT",
+      "element": "PAGE",
+      "status": "A",
+      "description": "Subpages without the page they are linked to in the project",
+      "level": "3",
+      "sql": "SELECT A.OBJECTVALUE1,\n       B.DESCR\nFROM PSPROJECTITEM A\nJOIN PSPNLDEFN B ON A.OBJECTVALUE1 = B.PNLNAME\nWHERE A.OBJECTTYPE = 5\n  AND B.PNLTYPE IN (1,\n                    2)\n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLFIELD C, PSPROJECTITEM D\n     WHERE B.PNLNAME = C.SUBPNLNAME\n       AND C.PNLNAME = D.OBJECTVALUE1\n       AND D.OBJECTTYPE = 5\n       AND D.OBJECTID1 = 9\n       AND D.PROJECTNAME = :1)",
+      "notes": "<p>Do we have subpages in the project where the matching page is not in the project? Relevant in case you have subpages that you actually did not wanted or in case you forgot to add the page.&nbsp;</p>",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "SUBPAGE"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "DESCR",
+          "alias": "DESCR"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "URL_PC_MISSING",
+      "category": "MISSING_DB",
+      "element": "URL",
+      "status": "A",
+      "description": "URL statements referenced in PeopleCode but missing from the database",
+      "level": "4",
+      "sql": "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'URL' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSURLDEFN C \n    WHERE \n      B.REFNAME = C.URL_ID\n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "REFNAME",
+          "alias": "MISSING_URL"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "PEOPLECODE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "XLAT_MISSING_FIELD_PROJ",
+      "category": "MISSING_PROJECT",
+      "element": "XLAT",
+      "status": "A",
+      "description": "Translate values without matching fields in the project",
+      "level": "4",
+      "sql": "SELECT \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3 \nFROM \n  PSPROJECTITEM A \nWHERE \n  A.OBJECTTYPE = 4 \n  AND A.OBJECTID1 = 6 \n  AND A.OBJECTID2 = 22 \n  AND A.OBJECTID3 = 21 \n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM B \n    WHERE \n      B.OBJECTTYPE = 2 \n      AND B.OBJECTID2 = 0 \n      AND B.OBJECTVALUE1 = A.OBJECTVALUE1\n      AND B.PROJECTNAME = A.PROJECTNAME \n  )",
+      "notes": "",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "OBJECTVALUE1"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        }
+      ],
+      "prompts": []
+    }
+  ]
 }
