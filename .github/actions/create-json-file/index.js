@@ -16,6 +16,7 @@ const create = async () => {
             }, data: []
         }
         for (let i = 0; i < files.length; i++) {
+            core.debug(`processing file: ${files[i]}`);
             const content = await readFile(files[i], 'utf8');
             json.data.push(JSON.parse(content));
         }
