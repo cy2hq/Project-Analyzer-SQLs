@@ -1,0 +1,26 @@
+{
+    "id" : "REC_MISSING_DESCR",
+    "category" : "MISSING_DB",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Records with missing description",
+    "level" : "4",
+    "sql" : "SELECT \nA.OBJECTVALUE1, \nB.RECDESCR\nFROM PSPROJECTITEM A \nJOIN PSRECDEFN B \nON A.OBJECTVALUE1 = B.RECNAME\nWHERE\nA.OBJECTTYPE = 0 \nAND A.PROJECTNAME = :1\nAND (B.RECDESCR IS NULL  or B.RECDESCR = ' ' )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "RECDESCR",
+            "alias" : "RECDESCR"
+        }
+    ],
+    "prompts" : [
+    ]
+}

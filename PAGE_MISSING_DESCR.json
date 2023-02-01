@@ -1,0 +1,26 @@
+{
+    "id" : "PAGE_MISSING_DESCR",
+    "category" : "MISSING_DB",
+    "element" : "PAGE",
+    "status" : "A",
+    "description" : "Page missing description",
+    "level" : "4",
+    "sql" : "SELECT A.OBJECTVALUE1, B.DESCR\nFROM PSPROJECTITEM A \nJOIN PSPNLDEFN B \nON A.OBJECTVALUE1 = B.PNLNAME\nwhere\nA.OBJECTTYPE = 5 \nAND A.PROJECTNAME = :1\nAND (B.DESCR IS NULL  or B.DESCR = ' ' )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "DESCR",
+            "alias" : "DESCR"
+        }
+    ],
+    "prompts" : [
+    ]
+}

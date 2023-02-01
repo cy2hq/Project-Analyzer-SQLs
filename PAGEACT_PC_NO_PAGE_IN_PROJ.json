@@ -1,0 +1,26 @@
+{
+    "id" : "PAGEACT_PC_NO_PAGE_IN_PROJ",
+    "category" : "OBSOLETE",
+    "element" : "PEOPLECODE",
+    "status" : "A",
+    "description" : "Page Activate PeopleCode without page in the project",
+    "level" : "2",
+    "sql" : "SELECT \n  C.PNLNAME, \n  B.PCTEXT \nFROM \n  PSPROJECTITEM A, \n  PSPCMTXT B, \n  PSPNLDEFN C \nWHERE \n  A.OBJECTTYPE = 44 \n  AND A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND B.OBJECTID1 = A.OBJECTID1 \n  AND B.OBJECTID2 = A.OBJECTID2 \n  AND B.OBJECTVALUE1 = C.PNLNAME \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM D, \n      PSPNLDEFN E \n    WHERE \n      D.OBJECTTYPE = 5 \n      AND E.PNLNAME = D.OBJECTVALUE1 \n      AND E.PNLNAME = C.PNLNAME \n      AND D.PROJECTNAME = A.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "PCTEXT",
+            "alias" : "PCTEXT"
+        }
+    ],
+    "prompts" : [
+    ]
+}

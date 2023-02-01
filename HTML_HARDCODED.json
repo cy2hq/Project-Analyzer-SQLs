@@ -1,0 +1,26 @@
+{
+    "id" : "HTML_HARDCODED",
+    "category" : "AUDIT",
+    "element" : "HTML",
+    "status" : "A",
+    "description" : "Hardcoded HTML in project",
+    "level" : "2",
+    "sql" : "SELECT \n  A.PNLNAME, \n  A.PNLFLDID \nFROM \n  PSPNLHTMLAREA A, \n  PSPROJECTITEM B, \n  PSPNLDEFN C \nWHERE \n  B.OBJECTTYPE = 5 \n  AND C.PNLNAME = B.OBJECTVALUE1 \n  AND C.PNLNAME = A.PNLNAME \n  AND B.PROJECTNAME = : 1",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "PNLFLDID",
+            "alias" : "PNLFLDID"
+        },
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

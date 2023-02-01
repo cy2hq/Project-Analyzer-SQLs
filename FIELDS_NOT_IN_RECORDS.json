@@ -1,0 +1,21 @@
+{
+    "id" : "FIELDS_NOT_IN_RECORDS",
+    "category" : "OBSOLETE",
+    "element" : "FIELD",
+    "status" : "A",
+    "description" : "Fields in the project that are not in records in the same project",
+    "level" : "3",
+    "sql" : "SELECT \n  B.FIELDNAME \nFROM \n  PSPROJECTITEM A, \n  PSDBFIELD B \nWHERE \n  A.OBJECTTYPE = 2 \n  AND A.OBJECTVALUE1 = B.FIELDNAME \n  AND A.OBJECTID2 = 0 \n  AND A.PROJECTNAME =: 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECFIELD C, \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 0 \n      AND C.SUBRECORD = 'N' \n      AND C.RECNAME = D.OBJECTVALUE1 \n      AND B.FIELDNAME = C.FIELDNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "id" : "MISSING_TRIGGER_CONFIG",
+    "category" : "AUDIT",
+    "element" : "TRIGGER",
+    "status" : "A",
+    "description" : "Table not set up in PeopleTools>Utilities>Audit>Maintain Audit Triggers",
+    "level" : "4",
+    "sql" : "SELECT OBJECTVALUE1  FROM PSPROJECTITEM A, ALL_TRIGGERS B where PROJECTNAME = :1\nAND 'PS_'||OBJECTVALUE1 = TABLE_NAME\nAND OBJECTTYPE = 0\nAND A.OBJECTVALUE1 NOT in(SELECT RECNAME from PSTRIGGERDEFN);",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "RECNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

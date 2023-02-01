@@ -1,0 +1,26 @@
+{
+    "id" : "PAGES_NOT_IN_COMPONENTS_DB",
+    "category" : "OBSOLETE",
+    "element" : "PAGE",
+    "status" : "A",
+    "description" : "Pages (normal / footer / header) not in components in the database but in the project",
+    "level" : "4",
+    "sql" : "SELECT A.OBJECTVALUE1,\n       B.DESCR\nFROM PSPROJECTITEM A\nJOIN PSPNLDEFN B ON A.OBJECTVALUE1 = B.PNLNAME\nWHERE A.OBJECTTYPE = 5\n  AND B.PNLTYPE IN (0,\n                    4,\n                    6)\n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLGROUP C\n     WHERE B.PNLNAME = C.PNLNAME)",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "PAGE"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "DESCR",
+            "alias" : "DESCR"
+        }
+    ],
+    "prompts" : [
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "id" : "MESS_CAT_PC_NOT_EXISTS_PROJECT",
+    "category" : "MISSING_PROJECT",
+    "element" : "MESS_CAT",
+    "status" : "A",
+    "description" : "Message catalog entries in PeopleCode missing in project",
+    "level" : "4",
+    "sql" : "SELECT \n  A.MESSAGE_SET_NBR, \n  A.MESSAGE_NBR, \n  C.OBJECTVALUE1, \n  C.OBJECTVALUE2, \n  C.OBJECTVALUE3, \n  C.OBJECTVALUE4 \nFROM \n  PSMSGCATDEFN A, \n  PSPCMTXT B, \n  PSPROJECTITEM C \nWHERE \n  C.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND C.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    C.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR C.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    C.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR C.OBJECTVALUE4 = ' '\n  ) \n  AND C.OBJECTID1 = B.OBJECTID1 \n  AND C.OBJECTID2 = B.OBJECTID2 \n  AND (\n    C.OBJECTID3 = B.OBJECTID3 \n    OR C.OBJECTID3 = 0\n  ) \n  AND (\n    C.OBJECTID4 = B.OBJECTID4 \n    OR C.OBJECTID4 = 0\n  ) \n  AND B.PCTEXT LIKE (\n    '%' || A.MESSAGE_SET_NBR || ', ' || A.MESSAGE_NBR || ',%'\n  ) \n  AND A.MESSAGE_SET_NBR > 20000 \n  AND C.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 25 \n      AND D.OBJECTID1 = 48 \n      AND D.OBJECTVALUE1 = A.MESSAGE_SET_NBR \n      AND D.OBJECTID2 = 49 \n      AND D.OBJECTVALUE2 = A.MESSAGE_NBR \n      AND D.PROJECTNAME = C.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "MESSAGE_SET_NBR",
+            "alias" : "MESSAGE_SET_NBR"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "OBJECTVALUE1"
+        },
+        {
+            "sequenceNumber" : 6,
+            "fieldName" : "OBJECTVALUE4",
+            "alias" : "OBJECTVALUE4"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "MESSAGE_NBR",
+            "alias" : "MESSAGE_NBR"
+        },
+        {
+            "sequenceNumber" : 4,
+            "fieldName" : "OBJECTVALUE2",
+            "alias" : "OBJECTVALUE2"
+        },
+        {
+            "sequenceNumber" : 5,
+            "fieldName" : "OBJECTVALUE3",
+            "alias" : "OBJECTVALUE3"
+        }
+    ],
+    "prompts" : [
+    ]
+}

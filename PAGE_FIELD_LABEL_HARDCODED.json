@@ -1,0 +1,31 @@
+{
+    "id" : "PAGE_FIELD_LABEL_HARDCODED",
+    "category" : "AUDIT",
+    "element" : "PAGE",
+    "status" : "A",
+    "description" : "Page fields that use a hardcoded label",
+    "level" : "4",
+    "sql" : "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.FIELDNAME \nFROM \n  PSPNLFIELD A, \n  PSPNLFIELDEXT B, \n  PSPROJECTITEM C \nWHERE \n  A.PNLNAME = B.PNLNAME \n  AND A.PNLFLDID = B.PNLFLDID \n  AND a.LBLTYPE = 1 \n  AND B.GRPBOXTYPE <> 5 \n  AND A.LBLTEXT <> ' ' \n  AND A.PNLNAME = C.OBJECTVALUE1 \n  AND C.OBJECTTYPE = 5 \n  AND C.PROJECTNAME = : 1",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "PNLFLDID",
+            "alias" : "PNLFLDID"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

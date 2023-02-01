@@ -1,0 +1,26 @@
+{
+    "id" : "COMP_SRCHTEXT_MSG_CAT_MISSING",
+    "category" : "MISSING_PROJECT",
+    "element" : "MESS_CAT",
+    "status" : "A",
+    "description" : "Component Search Text missing message catalog in project",
+    "level" : "4",
+    "sql" : "SELECT \n  A.SRCHTEXTMSGSET, \n  A.SRCHTEXTMSGNUM \nFROM \n  PSPNLGRPDEFN A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 7 \n  AND B.OBJECTID1 = 10 \n  AND B.OBJECTVALUE1 = A.PNLGRPNAME \n  AND A.SRCHTEXTMSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.SRCHTEXTMSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.SRCHTEXTMSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "SRCHTEXTMSGSET",
+            "alias" : "SRCHTEXTMSGSET"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "SRCHTEXTMSGNUM",
+            "alias" : "SRCHTEXTMSGNUM"
+        }
+    ],
+    "prompts" : [
+    ]
+}

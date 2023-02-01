@@ -1,0 +1,41 @@
+{
+    "id" : "PAGEFIELD_STYLE_CLASSES",
+    "category" : "FLUID",
+    "element" : "STYLECLASS",
+    "status" : "A",
+    "description" : "PageField style classes in project",
+    "level" : "2",
+    "sql" : "SELECT \n  A.PNLNAME, \n  A.RECNAME, \n  A.FIELDNAME, \n  A.FIELDNUM, \n  B.FFSTYLELONG \nFROM \n  PSPNLFIELD A, \n  PSPNLFIELDEXT B \nWHERE \n  B.FFSTYLELONG NOT LIKE ' | | | | ' \n  AND B.FFSTYLELONG NOT LIKE ' ' \n  AND A.PNLNAME = B.PNLNAME \n  AND A.PNLFLDID = B.PNLFLDID \n  AND EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 5 \n      AND A.PNLNAME = C.OBJECTVALUE1 \n      AND C.PROJECTNAME = : 1\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        },
+        {
+            "sequenceNumber" : 5,
+            "fieldName" : "FFSTYLELONG",
+            "alias" : "FFSTYLELONG"
+        },
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        },
+        {
+            "sequenceNumber" : 4,
+            "fieldName" : "FIELDNUM",
+            "alias" : "FIELDNUM"
+        }
+    ],
+    "prompts" : [
+    ]
+}

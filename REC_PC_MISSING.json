@@ -1,0 +1,41 @@
+{
+    "id" : "REC_PC_MISSING",
+    "category" : "MISSING_DB",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Records referenced in PeopleCode that are missing in the database",
+    "level" : "4",
+    "sql" : "SELECT \n  B.REFNAME, \n  A.OBJECTVALUE1, \n  A.OBJECTVALUE2, \n  A.OBJECTVALUE3, \n  A.OBJECTVALUE4 \nFROM \n  PSPROJECTITEM A, \n  PSPCMNAME B \nWHERE \n  A.OBJECTVALUE1 = B.OBJECTVALUE1 \n  AND A.OBJECTVALUE2 = B.OBJECTVALUE2 \n  AND (\n    A.OBJECTVALUE3 = B.OBJECTVALUE3 \n    OR A.OBJECTVALUE3 = ' '\n  ) \n  AND (\n    A.OBJECTVALUE4 = B.OBJECTVALUE4 \n    OR A.OBJECTVALUE4 = ' '\n  ) \n  AND A.OBJECTID1 = B.OBJECTID1 \n  AND A.OBJECTID2 = B.OBJECTID2 \n  AND (\n    A.OBJECTID3 = B.OBJECTID3 \n    OR A.OBJECTID3 = 0\n  ) \n  AND (\n    A.OBJECTID4 = B.OBJECTID4 \n    OR A.OBJECTID4 = 0\n  ) \n  AND B.RECNAME = 'RECORD' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS (\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C \n    WHERE \n      B.REFNAME = C.RECNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "REFNAME",
+            "alias" : "MISSING_RECORD"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "PEOPLECODE"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "OBJECTVALUE2",
+            "alias" : "OBJECTVALUE2"
+        },
+        {
+            "sequenceNumber" : 4,
+            "fieldName" : "OBJECTVALUE3",
+            "alias" : "OBJECTVALUE3"
+        },
+        {
+            "sequenceNumber" : 5,
+            "fieldName" : "OBJECTVALUE4",
+            "alias" : "OBJECTVALUE4"
+        }
+    ],
+    "prompts" : [
+    ]
+}

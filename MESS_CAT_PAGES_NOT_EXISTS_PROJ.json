@@ -1,0 +1,36 @@
+{
+    "id" : "MESS_CAT_PAGES_NOT_EXISTS_PROJ",
+    "category" : "MISSING_PROJECT",
+    "element" : "MESS_CAT",
+    "status" : "A",
+    "description" : "Message Catalog entries on pages that do not exist in the project",
+    "level" : "4",
+    "sql" : "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.GRDLBLMSGSET, \n  A.GRDLBLMSGNUM \nFROM \n  PSPNLFIELD A, \n  PSPROJECTITEM B \nWHERE \n  A.PNLNAME = B.OBJECTVALUE1 \n  AND B.OBJECTTYPE = 5 \n  AND A.GRDLBLMSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.GRDLBLMSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.GRDLBLMSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "PNLFLDID",
+            "alias" : "PNLFLDID"
+        },
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "GRDLBLMSGSET",
+            "alias" : "GRDLBLMSGSET"
+        },
+        {
+            "sequenceNumber" : 4,
+            "fieldName" : "GRDLBLMSGNUM",
+            "alias" : "GRDLBLMSGNUM"
+        }
+    ],
+    "prompts" : [
+    ]
+}

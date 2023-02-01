@@ -1,0 +1,26 @@
+{
+    "id" : "COMP_WITHOUT_REG_PROJECT",
+    "category" : "MISSING_PROJECT",
+    "element" : "COMPONENT",
+    "status" : "A",
+    "description" : "Components without a portal registry item in the same project",
+    "level" : "2",
+    "sql" : "SELECT \n  B.PNLGRPNAME, \n  B.DESCR \nFROM \n  PSPROJECTITEM A, \n  PSPNLGRPDEFN B \nWHERE \n  B.PNLGRPNAME = A.OBJECTVALUE1 \n  AND B.MARKET = A.OBJECTVALUE2 \n  AND A.OBJECTTYPE = 7 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C, \n      PSPRSMDEFN D \n    WHERE \n      C.OBJECTTYPE = 55 \n      AND C.OBJECTID1 = 99 \n      AND C.OBJECTVALUE1 = D.PORTAL_NAME \n      AND C.OBJECTID2 = 100 \n      AND C.OBJECTVALUE2 = D.PORTAL_REFTYPE \n      AND C.OBJECTID3 = 101 \n      AND C.OBJECTVALUE3 = D.PORTAL_OBJNAME \n      AND A.PROJECTNAME = C.PROJECTNAME \n      AND B.PNLGRPNAME = D.PORTAL_URI_SEG2\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLGRPNAME",
+            "alias" : "PNLGRPNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "DESCR",
+            "alias" : "DESCR"
+        }
+    ],
+    "prompts" : [
+    ]
+}

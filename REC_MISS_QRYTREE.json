@@ -1,0 +1,26 @@
+{
+    "id" : "REC_MISS_QRYTREE",
+    "category" : "MISSING_DB",
+    "element" : "RECORD",
+    "status" : "A",
+    "description" : "Records missing from Query Tree",
+    "level" : "4",
+    "sql" : "SELECT \n  B.QRYNAME, \n  B.RECNAME \nFROM \n  PSPROJECTITEM A, \n  PSQRYRECORD B \n WHERE \n A.OBJECTTYPE = 10 \n AND  A.OBJECTVALUE1 = B.QRYNAME\n  AND A.PROJECTNAME = :1\n  AND B.RECNAME NOT IN (SELECT TREE_NODE FROM  PSTREENODE WHERE TREE_NAME = 'QUERY_TREE_SKEMA');",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "QRYNAME",
+            "alias" : "QUERY_NAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "RECNAME",
+            "alias" : "RECORD_NAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

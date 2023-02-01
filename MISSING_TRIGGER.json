@@ -1,0 +1,21 @@
+{
+    "id" : "MISSING_TRIGGER",
+    "category" : "MISSING_DB",
+    "element" : "TRIGGER",
+    "status" : "A",
+    "description" : "Trigger not created in Database",
+    "level" : "4",
+    "sql" : "SELECT DISTINCT TRIGGERNAME   from PSPROJECTITEM A, PSTRIGGERDEFN B   WHERE PROJECTNAME = :1\n AND   OBJECTVALUE1 = RECNAME\n AND OBJECTTYPE = 0\n    AND   NOT EXISTS (SELECT 'X' from ALL_TRIGGERS C WHERE (B.RECNAME =SUBSTR(TABLE_NAME,4,15) OR B.RECNAME = TABLE_NAME))\n    ;",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "TRIGGERNAME",
+            "alias" : "TRIGGERNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

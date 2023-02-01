@@ -1,0 +1,26 @@
+{
+    "id" : "FIELDS_NOT_ON_PAGES",
+    "category" : "OBSOLETE",
+    "element" : "FIELD",
+    "status" : "A",
+    "description" : "Fields in the project that do not exist on pages in the project",
+    "level" : "2",
+    "sql" : "SELECT \n  B.FIELDNAME \nFROM \n  PSPROJECTITEM A, \n  PSDBFIELD B \nWHERE \n  A.OBJECTTYPE = 2 \n  AND A.OBJECTVALUE1 = B.FIELDNAME \n  AND A.OBJECTID2 = 0 \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPNLFIELD C, \n      PSPROJECTITEM D \n    WHERE \n      D.OBJECTTYPE = 5 \n      AND C.PNLNAME = D.OBJECTVALUE1 \n      AND B.FIELDNAME = C.FIELDNAME \n      AND A.PROJECTNAME = D.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "id" : "COMP_ADDLINK_MSG_CAT_MISSING",
+    "category" : "MISSING_PROJECT",
+    "element" : "MESS_CAT",
+    "status" : "A",
+    "description" : "Component Add Link missing message catalog in project",
+    "level" : "4",
+    "sql" : "SELECT \n  A.ADDLINKMSGSET, \n  A.ADDLINKMSGNUM \nFROM \n  PSPNLGRPDEFN A, \n  PSPROJECTITEM B \nWHERE \n  B.OBJECTTYPE = 7 \n  AND B.OBJECTID1 = 10 \n  AND B.OBJECTVALUE1 = A.PNLGRPNAME \n  AND A.ADDLINKMSGSET > 20000 \n  AND B.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSPROJECTITEM C \n    WHERE \n      C.OBJECTTYPE = 25 \n      AND C.OBJECTID1 = 48 \n      AND C.OBJECTVALUE1 = A.ADDLINKMSGSET \n      AND C.OBJECTID2 = 49 \n      AND C.OBJECTVALUE2 = A.ADDLINKMSGNUM \n      AND C.PROJECTNAME = B.PROJECTNAME\n  )",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "ADDLINKMSGSET",
+            "alias" : "ADDLINKMSGSET"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "ADDLINKMSGNUM",
+            "alias" : "ADDLINKMSGNUM"
+        }
+    ],
+    "prompts" : [
+    ]
+}

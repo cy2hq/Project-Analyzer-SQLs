@@ -1,0 +1,41 @@
+{
+    "id" : "FIELDS_STATIC_LABELS",
+    "category" : "AUDIT",
+    "element" : "FIELD",
+    "status" : "A",
+    "description" : "Fields with a static label on pages in the project",
+    "level" : "2",
+    "sql" : "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.PNLFIELDNAME, \n  A.RECNAME, \n  A.FIELDNAME \nFROM \n  PSPNLFIELD A, \n  PSPNLFIELDEXT B, \n  PSPROJECTITEM C \nWHERE \n  A.PNLNAME = B.PNLNAME \n  AND A.PNLFLDID = B.PNLFLDID \n  AND LBLTYPE = 1 \n  AND B.GRPBOXTYPE <> 5 \n  AND A.LBLTEXT <> ' ' \n  AND A.PNLNAME = C.OBJECTVALUE1 \n  AND C.OBJECTTYPE = 5 \n  AND C.PROJECTNAME = : 1",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "PNLFLDID",
+            "alias" : "PNLFLDID"
+        },
+        {
+            "sequenceNumber" : 5,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        },
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 4,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "PNLFIELDNAME",
+            "alias" : "PNLFIELDNAME"
+        }
+    ],
+    "prompts" : [
+    ]
+}

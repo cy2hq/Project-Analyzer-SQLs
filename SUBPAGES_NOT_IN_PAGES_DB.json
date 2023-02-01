@@ -1,0 +1,26 @@
+{
+    "id" : "SUBPAGES_NOT_IN_PAGES_DB",
+    "category" : "OBSOLETE",
+    "element" : "PAGE",
+    "status" : "A",
+    "description" : "Subpages (sub / secundary) not in pages in the database but in the project",
+    "level" : "4",
+    "sql" : "SELECT A.OBJECTVALUE1,\n       B.DESCR\nFROM PSPROJECTITEM A\nJOIN PSPNLDEFN B ON A.OBJECTVALUE1 = B.PNLNAME\nWHERE A.OBJECTTYPE = 5\n  AND B.PNLTYPE IN (1,\n                    2)\n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLFIELD C\n     WHERE B.PNLNAME = C.SUBPNLNAME)",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "SUBPAGE"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "DESCR",
+            "alias" : "DESCR"
+        }
+    ],
+    "prompts" : [
+    ]
+}

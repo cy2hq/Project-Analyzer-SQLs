@@ -1,0 +1,66 @@
+{
+    "id" : "FIELDS_STATIC_PLACEHOLDER_FL",
+    "category" : "AUDIT",
+    "element" : "FIELD",
+    "status" : "A",
+    "description" : "Fields with a static placeholder text in the project (Fluid)",
+    "level" : "2",
+    "sql" : "SELECT \n  A.PNLNAME, \n  A.PNLFLDID, \n  A.FIELDNUM, \n  A.PNLFIELDNAME, \n  A.LABEL_ID, \n  A.LBLTEXT, \n  A.RECNAME, \n  A.FIELDNAME, \n  B.PLHTYPE, \n  B.PLACEHOLDER \nFROM \n  PSPNLFIELD A, \n  PSPNLFIELDEXT B, \n  PSPROJECTITEM C \nWHERE \n  A.PNLNAME = B.PNLNAME \n  AND A.PNLFLDID = B.PNLFLDID \n  AND A.PNLNAME = C.OBJECTVALUE1 \n  AND C.OBJECTTYPE = 5 \n  AND PLHTYPE = 1 \n  AND C.PROJECTNAME = : 1",
+    "notes" : "",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "PNLFLDID",
+            "alias" : "PNLFLDID"
+        },
+        {
+            "sequenceNumber" : 4,
+            "fieldName" : "PNLFIELDNAME",
+            "alias" : "PNLFIELDNAME"
+        },
+        {
+            "sequenceNumber" : 7,
+            "fieldName" : "RECNAME",
+            "alias" : "RECNAME"
+        },
+        {
+            "sequenceNumber" : 9,
+            "fieldName" : "PLHTYPE",
+            "alias" : "PLHTYPE"
+        },
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "PNLNAME",
+            "alias" : "PNLNAME"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "FIELDNUM",
+            "alias" : "FIELDNUM"
+        },
+        {
+            "sequenceNumber" : 5,
+            "fieldName" : "LABEL_ID",
+            "alias" : "LABEL_ID"
+        },
+        {
+            "sequenceNumber" : 6,
+            "fieldName" : "LBLTEXT",
+            "alias" : "LBLTEXT"
+        },
+        {
+            "sequenceNumber" : 8,
+            "fieldName" : "FIELDNAME",
+            "alias" : "FIELDNAME"
+        },
+        {
+            "sequenceNumber" : 10,
+            "fieldName" : "PLACEHOLDER",
+            "alias" : "PLACEHOLDER"
+        }
+    ],
+    "prompts" : [
+    ]
+}

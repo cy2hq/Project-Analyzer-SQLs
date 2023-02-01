@@ -1,0 +1,26 @@
+{
+    "id" : "PAGES_WITHOUT_COMPONENT",
+    "category" : "MISSING_PROJECT",
+    "element" : "PAGE",
+    "status" : "A",
+    "description" : "Pages without the component they are linked to in the project",
+    "level" : "3",
+    "sql" : "SELECT A.OBJECTVALUE1,\n       B.DESCR\nFROM PSPROJECTITEM A\nJOIN PSPNLDEFN B ON A.OBJECTVALUE1 = B.PNLNAME\nWHERE A.OBJECTTYPE = 5\n  AND B.PNLTYPE IN (0,\n                    4,\n                    6)\n  AND A.PROJECTNAME = :1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLGROUP C, PSPROJECTITEM D\n     WHERE B.PNLNAME = C.PNLNAME\n       AND C.PNLGRPNAME = D.OBJECTVALUE1\n       AND D.OBJECTTYPE = 7\n       AND D.OBJECTID1 = 10\n       AND D.PROJECTNAME = :1)",
+    "notes" : "<p>Do we have pages in the project where the matching component is not in the project?&nbsp;Relevant in case you have pages that you actually did not wanted or in case you forgot to add the component.</p>",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "PAGE"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "DESCR",
+            "alias" : "DESCR"
+        }
+    ],
+    "prompts" : [
+    ]
+}
