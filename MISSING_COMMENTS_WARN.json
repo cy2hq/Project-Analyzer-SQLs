@@ -1,0 +1,41 @@
+{
+    "id" : "MISSING_COMMENTS_WARN",
+    "category" : "AUDIT",
+    "element" : "COMMENTS",
+    "status" : "A",
+    "description" : "AE action description missing",
+    "level" : "3",
+    "sql" : "SELECT 'Application Engine Sections',  \n       p.objectvalue1, p.objectvalue2, x.ae_step, ' '\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.PSAEAPPLDEFN s,\n                sysadm.psaestepdefn x\nWHERE p.projectname = :1\nAND x.ae_applid = p.objectvalue1\nAND x.ae_section = p.objectvalue2\nAND s.ae_applid = x.ae_applid\nAND p.objecttype= 34\nAND x.descrlong IS NULL",
+    "notes" : "<p>Add a description of the action if you think it would be helpful in understanding what the process is doing</p>",
+    "languages" : [
+    ],
+    "fields" : [
+        {
+            "sequenceNumber" : 1,
+            "fieldName" : "OBJECTID",
+            "alias" : "OBJECT"
+        },
+        {
+            "sequenceNumber" : 2,
+            "fieldName" : "OBJECTVALUE1",
+            "alias" : "OBJECTVALUE1"
+        },
+        {
+            "sequenceNumber" : 3,
+            "fieldName" : "OBJECTVALUE2",
+            "alias" : "OBJECTVALUE2"
+        },
+        {
+            "sequenceNumber" : 4,
+            "fieldName" : "OBJECTVALUE3",
+            "alias" : "OBJECTVALUE3"
+        },
+        {
+            "sequenceNumber" : 5,
+            "fieldName" : "OBJECTVALUE4",
+            "alias" : "OBJECTVALUE4"
+        }
+    ],
+    "prompts" : [
+    ]
+}
