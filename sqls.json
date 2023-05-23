@@ -1238,7 +1238,7 @@
       "status": "A",
       "description": "Missing Comments in Properties",
       "level": "4",
-      "sql": "SELECT 'Records' \"OBJECTID\", \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psrecdefn x\nWHERE p.projectname = :1\nAND x.recname = p.objectvalue1\nAND p.objecttype= 0\nAND (x.descrlong IS NULL OR objectownerid = ' ' OR recdescr = ' ')\nUNION\nSELECT 'Fields', \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psdbfield x\nWHERE p.projectname = :1\nAND x.fieldname = p.objectvalue1\nAND p.objecttype= 2\nAND (x.descrlong IS NULL OR objectownerid = ' ')\nUNION\nSELECT 'Pages',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.pspnldefn x\nWHERE p.projectname = :1\nAND x.pnlname = p.objectvalue1\nAND p.objecttype= 5\nAND (x.descrlong IS NULL OR objectownerid = ' ' OR descr = ' ')\nUNION\nSELECT 'Menus',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psmenudefn x\nWHERE p.projectname = :1\nAND x.menuname = p.objectvalue1\nAND p.objecttype= 6\nAND (x.descrlong IS NULL OR objectownerid = ' ' OR descr = ' ')\nUNION\nSELECT 'Components',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.pspnlgrpdefn x\nWHERE p.projectname = :1\nAND x.pnlgrpname = p.objectvalue1\nAND x.market = p.objectvalue2\nAND p.objecttype= 7\nAND (x.descrlong IS NULL OR objectownerid = ' ' OR descr = ' ')\nUNION\nSELECT 'Message Catalog Entries',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.PSMSGCATDEFN x\nWHERE p.projectname = :1\nAND x.message_set_nbr = p.objectvalue1\nAND x.message_nbr = p.objectvalue2\nAND p.objecttype= 25\nAND x.descrlong IS NULL\nUNION\nSELECT 'Application Engine Programs',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.PSAEAPPLDEFN x\nWHERE p.projectname = :1\nAND x.ae_applid = p.objectvalue1\nAND p.objecttype= 33\nAND (x.descrlong IS NULL OR objectownerid = ' ' OR descr = ' ')\nUNION\nSELECT 'Application Engine Sections',  \n       p.objectvalue1, p.objectvalue2, x.ae_step, ' '\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.PSAEAPPLDEFN s,\n                sysadm.psaestepdefn x\nWHERE p.projectname = :1\nAND x.ae_applid = p.objectvalue1\nAND x.ae_section = p.objectvalue2\nAND s.ae_applid = x.ae_applid\nAND p.objecttype= 34\nAND x.descrlong IS NULL\nUNION\nSELECT 'Query',  \n       p.objectvalue1, ' ',' ', ' '\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psqrydefn x\n              \nWHERE p.projectname = :1\nAND x.qryname = p.objectvalue1\n\nAND p.objecttype= 10\nAND x.descrlong IS NULL\n;",
+      "sql": "SELECT 'Records' \"OBJECTID\", \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psrecdefn x\nWHERE p.projectname = :1\nAND x.recname = p.objectvalue1\nAND p.objecttype= 0\nAND (x.descrlong IS NULL  OR recdescr = ' ')\nUNION\nSELECT 'Fields', \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psdbfield x\nWHERE p.projectname = :1\nAND x.fieldname = p.objectvalue1\nAND p.objecttype= 2\nAND (x.descrlong IS NULL )\nUNION\nSELECT 'Pages',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.pspnldefn x\nWHERE p.projectname = :1\nAND x.pnlname = p.objectvalue1\nAND p.objecttype= 5\nAND (x.descrlong IS NULL  OR descr = ' ')\nUNION\nSELECT 'Menus',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psmenudefn x\nWHERE p.projectname = :1\nAND x.menuname = p.objectvalue1\nAND p.objecttype= 6\nAND (x.descrlong IS NULL OR descr = ' ')\nUNION\nSELECT 'Components',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.pspnlgrpdefn x\nWHERE p.projectname = :1\nAND x.pnlgrpname = p.objectvalue1\nAND x.market = p.objectvalue2\nAND p.objecttype= 7\nAND (x.descrlong IS NULL  OR descr = ' ')\nUNION\nSELECT 'Application Engine Programs',  \n       p.objectvalue1, p.objectvalue2, p.objectvalue3, p.objectvalue4\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.PSAEAPPLDEFN x\nWHERE p.projectname = :1\nAND x.ae_applid = p.objectvalue1\nAND p.objecttype= 33\nAND (x.descrlong IS NULL )\n\nUNION\nSELECT 'Query',  \n       p.objectvalue1, ' ',' ', ' '\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.psqrydefn x\n              \nWHERE p.projectname = :1\nAND x.qryname = p.objectvalue1\n\nAND p.objecttype= 10\nAND x.descrlong IS NULL\n;",
       "notes": "",
       "languages": [],
       "fields": [
@@ -1246,6 +1246,45 @@
           "sequenceNumber": 1,
           "fieldName": "OBJECTID",
           "alias": "OBJECT TYPE"
+        },
+        {
+          "sequenceNumber": 2,
+          "fieldName": "OBJECTVALUE1",
+          "alias": "OBJECTVALUE1"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "OBJECTVALUE2",
+          "alias": "OBJECTVALUE2"
+        },
+        {
+          "sequenceNumber": 4,
+          "fieldName": "OBJECTVALUE3",
+          "alias": "OBJECTVALUE3"
+        },
+        {
+          "sequenceNumber": 5,
+          "fieldName": "OBJECTVALUE4",
+          "alias": "OBJECTVALUE4"
+        }
+      ],
+      "prompts": []
+    },
+    {
+      "id": "MISSING_COMMENTS_WARN",
+      "category": "AUDIT",
+      "element": "COMMENTS",
+      "status": "A",
+      "description": "AE action description missing",
+      "level": "3",
+      "sql": "SELECT 'Application Engine Sections',  \n       p.objectvalue1, p.objectvalue2, x.ae_step, ' '\nFROM sysadm.PSPROJECTITEM p,\n                sysadm.PSAEAPPLDEFN s,\n                sysadm.psaestepdefn x\nWHERE p.projectname = :1\nAND x.ae_applid = p.objectvalue1\nAND x.ae_section = p.objectvalue2\nAND s.ae_applid = x.ae_applid\nAND p.objecttype= 34\nAND x.descrlong IS NULL",
+      "notes": "<p>Add a description of the action if you think it would be helpful in understanding what the process is doing</p>",
+      "languages": [],
+      "fields": [
+        {
+          "sequenceNumber": 1,
+          "fieldName": "OBJECTID",
+          "alias": "OBJECT"
         },
         {
           "sequenceNumber": 2,
@@ -1770,7 +1809,7 @@
       "status": "A",
       "description": "Records that are obsolete in the project",
       "level": "3",
-      "sql": "SELECT B.RECNAME\nFROM PSPROJECTITEM A,\n     PSRECDEFN B\nWHERE A.OBJECTTYPE = 0\n  AND A.OBJECTID1 = 1\n  AND A.OBJECTVALUE1 = B.RECNAME\n  AND A.OBJECTID2 = 0\n  AND A.PROJECTNAME = : 1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLFIELD C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 5\n       AND D.OBJECTID1 = 9\n       AND C.PNLNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.RECNAME\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSRECFIELD C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 0\n       AND D.OBJECTID1 = 1\n       AND C.RECNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.EDITTABLE\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSRECDEFN C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 0\n       AND D.OBJECTID1 = 1\n       AND C.RECNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.RELLANGRECNAME\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLGRPDEFN C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 7\n       AND D.OBJECTID1 = 10\n       AND C.PNLGRPNAME = D.OBJECTVALUE1\n       AND (B.RECNAME = C.SEARCHRECNAME\n            OR B.RECNAME = C.ADDSRCHRECNAME)\n       AND A.PROJECTNAME = D.PROJECTNAME )",
+      "sql": "SELECT B.RECNAME\nFROM PSPROJECTITEM A,\n     PSRECDEFN B\nWHERE A.OBJECTTYPE = 0\n  AND A.OBJECTID1 = 1\n  AND A.OBJECTVALUE1 = B.RECNAME\n  AND A.OBJECTID2 = 0\n  AND A.PROJECTNAME = : 1\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLFIELD C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 5\n       AND D.OBJECTID1 = 9\n       AND C.PNLNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.RECNAME\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSRECFIELD C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 0\n       AND D.OBJECTID1 = 1\n       AND C.RECNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.EDITTABLE\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSRECDEFN C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 0\n       AND D.OBJECTID1 = 1\n       AND C.RECNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.RELLANGRECNAME\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSRECDEFN C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 0\n       AND D.OBJECTID1 = 1\n       AND C.RECNAME = D.OBJECTVALUE1\n       AND B.RECNAME = C.AUDITRECNAME\n       AND A.PROJECTNAME = D.PROJECTNAME )\n  AND NOT EXISTS\n    (SELECT 'X'\n     FROM PSPNLGRPDEFN C, PSPROJECTITEM D\n     WHERE D.OBJECTTYPE = 7\n       AND D.OBJECTID1 = 10\n       AND C.PNLGRPNAME = D.OBJECTVALUE1\n       AND (B.RECNAME = C.SEARCHRECNAME\n            OR B.RECNAME = C.ADDSRCHRECNAME)\n       AND A.PROJECTNAME = D.PROJECTNAME )",
       "notes": "<p>Records in the project that do not exist on a page in the project, do not exist as a prompt record for another record in the project, do not exist as a related language record for a another record in the project and do not exist as a search record for a component in the project.&nbsp;</p>",
       "languages": [],
       "fields": [
@@ -1808,7 +1847,7 @@
       "status": "A",
       "description": "Records with a default record that is missing from the database",
       "level": "4",
-      "sql": "SELECT \n  B.RECNAME, \n  B.DEFRECNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B, \n  PSRECDEFN E \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND B.DEFRECNAME <> ' ' \n  AND B.DEFRECNAME = E.RECNAME \n  AND E.LASTUPDOPRID <> 'PPLSOFT' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C WHERE C.RECNAME = B.DEFRECNAME \n    )",
+      "sql": "SELECT \n  B.RECNAME, \n  B.DEFRECNAME, \n B.FIELDNAME \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B\nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND B.DEFRECNAME <> ' ' \n  AND B.LASTUPDOPRID <> 'PPLSOFT' \n  AND A.PROJECTNAME = : 1 \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C WHERE C.RECNAME = B.DEFRECNAME \n    )",
       "notes": "",
       "languages": [],
       "fields": [
@@ -1821,6 +1860,11 @@
           "sequenceNumber": 2,
           "fieldName": "DEFRECNAME",
           "alias": "DEFRECNAME"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
         }
       ],
       "prompts": []
@@ -1928,7 +1972,7 @@
       "status": "A",
       "description": "Records with missing prompt tables in the database",
       "level": "4",
-      "sql": "SELECT \n  B.RECNAME, \n  B.EDITTABLE \nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B, \n  PSRECDEFN E \nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND A.PROJECTNAME = : 1 \n  AND B.EDITTABLE <> ' ' \n  AND B.EDITTABLE = E.RECNAME \n  AND E.LASTUPDOPRID <> 'PPLSOFT' \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C\n      WHERE C.RECNAME = B.EDITTABLE \n  )",
+      "sql": "SELECT \n  B.RECNAME, \n  B.EDITTABLE, \n B.FIELDNAME\nFROM \n  PSPROJECTITEM A, \n  PSRECFIELD B\nWHERE \n  A.OBJECTTYPE = 0 \n  AND A.OBJECTVALUE1 = B.RECNAME \n  AND A.PROJECTNAME = : 1 \n  AND B.EDITTABLE <> ' ' \n  AND B.EDITTABLE NOT LIKE '%EDITTABLE%' \n  AND B.LASTUPDOPRID <> 'PPLSOFT' \n  AND NOT EXISTS(\n    SELECT \n      'X' \n    FROM \n      PSRECDEFN C\n      WHERE C.RECNAME = B.EDITTABLE \n  )",
       "notes": "",
       "languages": [],
       "fields": [
@@ -1941,6 +1985,11 @@
           "sequenceNumber": 2,
           "fieldName": "EDITTABLE",
           "alias": "EDITTABLE"
+        },
+        {
+          "sequenceNumber": 3,
+          "fieldName": "FIELDNAME",
+          "alias": "FIELDNAME"
         }
       ],
       "prompts": []
@@ -2043,7 +2092,7 @@
       "status": "A",
       "description": "Records missing from Query Tree",
       "level": "4",
-      "sql": "SELECT \n  B.QRYNAME, \n  B.RECNAME \nFROM \n  PSPROJECTITEM A, \n  PSQRYRECORD B \n WHERE \n A.OBJECTTYPE = 10 \n AND  A.OBJECTVALUE1 = B.QRYNAME\n  AND A.PROJECTNAME = :1\n  AND B.RECNAME NOT IN (SELECT TREE_NODE FROM  PSTREENODE WHERE TREE_NAME = 'QUERY_TREE_SKEMA');",
+      "sql": "SELECT \n  B.QRYNAME, \n  B.RECNAME \nFROM \n  PSPROJECTITEM A, \n  PSQRYRECORD B \n WHERE \n A.OBJECTTYPE = 10 \n AND  A.OBJECTVALUE1 = B.QRYNAME\n  AND A.PROJECTNAME = :1\n  AND B.RECNAME NOT IN (SELECT TREE_NODE FROM  PSTREENODE WHERE TREE_NAME = :2);",
       "notes": "",
       "languages": [],
       "fields": [
@@ -2058,7 +2107,13 @@
           "alias": "RECORD_NAME"
         }
       ],
-      "prompts": []
+      "prompts": [
+        {
+          "promptNumber": 2,
+          "field": "TREE_NAME",
+          "default": ""
+        }
+      ]
     },
     {
       "id": "REC_PC_MISSING",
